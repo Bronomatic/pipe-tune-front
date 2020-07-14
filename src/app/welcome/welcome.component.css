@@ -1,0 +1,22 @@
+
+@font-face {
+  /* font-family: 'Roboto', sans-serif; */
+  /* src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap'); */
+}
+.all {
+  /* font-family: 'Roboto', sans-serif; */
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+a {
+  padding-right: 20px;
+}
+
+.jumbotron {
+  background-image: url('../../assets/blackwatch.png');
+}

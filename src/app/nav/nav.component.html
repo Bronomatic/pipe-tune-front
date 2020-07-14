@@ -1,0 +1,21 @@
+<nav class="navbar navbar-extend-lg navbar-dark bg-dark">
+  <!-- * title -->
+  <a routerLink="/" class="navbar-brand">
+    <h3 class="text-success">Tune Search</h3>
+  </a>
+  <!-- * search form -->
+  <form [formGroup]="searchForm" class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmitSearch()">
+    <select name="" id="drop" class="form-control mx-1" formControlName="searchType">
+      <option value="name" selected>Tune name</option>
+      <option value="type">Created by user</option>
+    </select>
+    <input type="text" class="form-control mx-1" formControlName="searchField">
+    <input type="submit" class="btn btn-success mx-1" value="Search">
+  </form>
+
+  <!-- * login/signup -->
+  <a routerLink="/login">
+    <button class="btn btn-secondary">Login / Signup</button>
+  </a>
+
+</nav>

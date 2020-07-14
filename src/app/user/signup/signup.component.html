@@ -1,0 +1,22 @@
+<div class="container">
+  <h3 class="text-center my-3">Signup</h3>
+  <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" name="email" formControlName="email">
+    <hr>
+    <label for="username">Username</label>
+    <input type="text" class="form-control" name="username" formControlName="username">
+    <hr>
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" formControlName="password">
+    <label for="password-confirm">Confirm Password</label>
+    <input type="password" class="form-control" name="confirm-password" formControlName="confirmPassword">
+    <hr>
+    <p *ngFor="let each of validationErrors" class="text-danger">{{ each }}</p>
+    <input type="submit" class="btn btn-success">
+  </form>
+  <hr>
+  <a routerLink="/login">
+    <button class="btn btn-secondary">Login</button>
+  </a>
+</div>
