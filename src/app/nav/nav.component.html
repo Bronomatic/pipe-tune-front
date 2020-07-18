@@ -14,8 +14,9 @@
   </form>
 
   <!-- * login/signup -->
-  <a routerLink="/login">
-    <button class="btn btn-secondary">Login / Signup</button>
+  <a routerLink="/login"  *ngIf="loggedIn" >
+    <button class="btn btn-secondary">Login</button>
   </a>
+  <button *ngIf="!loggedIn" class="btn btn-secondary">Logout</button>
 
 </nav>

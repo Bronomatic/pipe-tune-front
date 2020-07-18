@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   role="img"
+   width="70"
+   height="70"
+   version="1.1"
+   id="svg74"
+   sodipodi:docname="eight.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata80">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Sheet Music for &quot;Temporary&quot;</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs78" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="3200"
+     inkscape:window-height="1321"
+     id="namedview76"
+     showgrid="true"
+     inkscape:zoom="1"
+     inkscape:cx="-301.09226"
+     inkscape:cy="40.249997"
+     inkscape:window-x="2391"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg74">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1329"
+       spacingx="70"
+       spacingy="70" />
+  </sodipodi:namedview>
+  <title
+     id="title2">Sheet Music for &quot;Temporary&quot;</title>
+  <g
+     id="g953"
+     transform="translate(192,98)">
+    <rect
+       y="-98"
+       x="-192"
+       height="70"
+       width="70"
+       id="rect1148"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:113.38582611;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+    <g
+       transform="translate(-57.718015,-290.846)"
+       id="g1380">
+      <path
+         d="m -97.547027,219.0078 c 0.351384,-0.1757 0.790614,-0.0879 1.010229,0.21961 0.08785,0.0879 0.307461,0.52708 0.570999,0.96631 1.229844,2.59145 1.844766,4.91937 1.932612,7.46691 0.04392,1.88869 -0.307461,3.46991 -1.185921,5.31467 -0.87846,1.80084 -1.844766,3.11853 -4.699761,6.41275 -1.976531,2.24008 -2.723221,3.20638 -3.513841,4.34838 -0.92238,1.36161 -1.62515,2.81107 -2.02046,4.08484 -0.21961,0.79061 -0.3953,1.97653 -0.3953,2.63538 v 0.21961 h -0.30746 -0.30747 v -5.49037 -5.49038 h 0.30747 0.30746 l 0.70276,-0.43923 c 2.67931,-1.62515 4.568,-3.07461 6.105301,-4.56799 1.141998,-1.18592 1.932612,-2.24007 2.503611,-3.38207 0.658845,-1.36161 0.87846,-2.54753 0.746691,-4.21661 -0.175692,-2.28399 -0.922383,-4.65583 -2.152227,-6.85198 -0.175692,-0.30747 -0.219615,-0.48316 -0.08785,-0.7467 0.08785,-0.21961 0.219615,-0.35138 0.483153,-0.48313 z"
+         id="path1029-1"
+         inkscape:connector-curvature="0"
+         style="stroke-width:1.4641" />
+      <path
+         d="m -97.59095,205.03296 c 0.527076,-0.0439 1.75692,0 2.240073,0.0879 1.712997,0.35138 2.767149,1.22984 3.162456,2.6793 0.08785,0.26354 0.08785,0.43923 0.08785,0.96631 0,0.65884 0,0.92238 -0.219615,1.58122 -0.966306,2.98677 -4.480146,5.75392 -8.081834,6.41276 -0.79062,0.13177 -2.10831,0.13177 -2.6793,0.0439 -1.80085,-0.39531 -2.89892,-1.27379 -3.29423,-2.72323 -0.0878,-0.26355 -0.0878,-0.43923 -0.0878,-0.96631 0,-0.65884 0,-0.92238 0.21962,-1.58122 0.35138,-1.142 1.09807,-2.24008 2.1083,-3.25031 1.75692,-1.75692 4.172692,-2.94284 6.544534,-3.2503 z"
+         id="path1027-4"
+         inkscape:connector-curvature="0"
+         style="stroke-width:1.4641" />
+      <path
+         d="m -106.4634,250.67626 v -37.82257 h 1.4641 v 37.82257 z"
+         id="path62-8"
+         inkscape:connector-curvature="0"
+         style="stroke-width:1.4641" />
+    </g>
+  </g>
+</svg>

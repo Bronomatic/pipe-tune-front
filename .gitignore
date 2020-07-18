@@ -44,3 +44,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# ignore all .svg, .jpg and .png files in the asssets directory and subdirectories
+assets/**/*.svg
+assets/**/*.jpg
+assets/**/*.jpeg
+assets/**/*.png

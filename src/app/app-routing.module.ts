@@ -6,12 +6,16 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { UserComponent } from './user/user/user.component';
+import { CreateComponent } from './user/create/create.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'user', component: UserComponent }
+  { path: 'user', component: UserComponent },
+  { path: 'create', component: CreateComponent },
+  { path: 'tune', component: ViewComponent }
 ];
 
 @NgModule({

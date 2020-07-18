@@ -15,9 +15,18 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  // * sign up
+  onSignup(data:Object) {
+    let url = 'http://localhost:8080/signup';
+    this.http.post(url, data)
+      .subscribe(response => {
+        this.router.navigate(['/']);
+      });
+  }
+
+  // * login
   onLogin(data:Object) {
     let url = 'http://localhost:8080/login';
-    // return this.http.post(url, data);
     this.http.post<{token: string, expiresIn: number, userId: string}>(url, data)
       .subscribe(response => {
         const token = response.token;
@@ -37,6 +46,7 @@ export class UserService {
 
   }
 
+  // * auth token functions
   getToken() {
     return this.token;
   }
@@ -47,11 +57,6 @@ export class UserService {
 
   getUserId() {
     return this.userId;
-  }
-
-  onSignup(data:Object) {
-    let url = 'http://localhost:8080/signup';
-    return this.http.post(url, data);
   }
 
   getAuthStatusListener() {

@@ -50,12 +50,7 @@ export class SignupComponent implements OnInit {
         username: this.signupForm.get('username').value,
         password: this.signupForm.get('password').value
       }
-      return this.userService
-        .onSignup(userData)
-        .subscribe((result:Object) => {
-          // * redirect on success
-          this.router.navigate(['/']);
-        });
+      this.userService.onSignup(userData);
     // * if inputs invalid
     }else{
       this.validation = false;

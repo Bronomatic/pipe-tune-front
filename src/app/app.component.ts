@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { NgForm } from '@angular/forms';
 import { UserService } from './user/user.service';
 
 @Component({
@@ -16,5 +15,4 @@ export class AppComponent implements OnInit {
     this.userService.autoAuthUser();
   }
 
-  // onSubmit() {}
 }

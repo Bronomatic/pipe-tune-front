@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   role="img"
+   width="70"
+   height="70"
+   version="1.1"
+   id="svg74"
+   sodipodi:docname="half.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata80">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Sheet Music for &quot;Temporary&quot;</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs78" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1363"
+     inkscape:window-height="1001"
+     id="namedview76"
+     showgrid="true"
+     inkscape:zoom="1"
+     inkscape:cx="-301.09226"
+     inkscape:cy="40.249997"
+     inkscape:window-x="2496"
+     inkscape:window-y="96"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg74">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1329"
+       spacingx="70"
+       spacingy="70" />
+  </sodipodi:namedview>
+  <title
+     id="title2">Sheet Music for &quot;Temporary&quot;</title>
+  <g
+     id="g4648"
+     transform="translate(164,70)">
+    <rect
+       y="-70"
+       x="-164"
+       height="70"
+       width="70"
+       id="rect1148"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:113.38582611;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+    <g
+       transform="translate(205,-262.84602)"
+       id="g1395">
+      <path
+         d="m -330.23996,205.04631 c 0.0879,-0.0439 0.39531,-0.0439 0.70277,-0.0439 1.53731,0 2.50361,0.35139 3.07461,1.18592 0.61492,0.87846 0.65885,1.97654 0.26354,3.51384 -0.61492,2.32792 -1.66907,3.997 -3.16246,4.9633 -2.06438,1.36162 -4.65583,2.10831 -7.90614,2.24008 -1.71299,0.0439 -2.76714,-0.30746 -3.33814,-1.18592 -0.61493,-0.87846 -0.65885,-1.97654 -0.26354,-3.51384 0.61492,-2.32792 1.66907,-3.997 3.16245,-4.9633 0.92239,-0.61493 1.80085,-1.05416 2.89892,-1.40554 1.31769,-0.43923 2.41577,-0.61492 4.56799,-0.79061 z m 1.88869,1.27376 c -0.3953,-0.13177 -0.92238,-0.17569 -1.31769,-0.0439 -1.05415,0.35138 -2.24007,1.01023 -4.7876,2.63538 -3.426,2.19615 -4.83153,3.29423 -5.22684,4.08484 -0.52708,1.05415 -0.0879,2.19615 0.96631,2.59146 0.35138,0.17569 1.01022,0.13177 1.44945,0 1.22985,-0.43923 2.81108,-1.36162 6.06138,-3.46992 2.37184,-1.58123 3.46992,-2.50361 3.8213,-3.20638 0.52708,-1.05415 0.0879,-2.19615 -0.96631,-2.59146 z m -12.78159,44.36955 v -37.82257 h 1.4641 v 37.82257 z"
+         class=""
+         id="path46-9"
+         inkscape:connector-curvature="0"
+         style="fill:#000000;stroke:none;stroke-width:1.4641" />
+    </g>
+  </g>
+</svg>

@@ -9,6 +9,7 @@ import { SearchService } from '../search.service';
 })
 export class NavComponent implements OnInit {
   searchForm: FormGroup;
+  loggedIn = true;
 
   constructor(private searchService: SearchService) { }
 
