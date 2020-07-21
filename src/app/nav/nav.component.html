@@ -14,9 +14,15 @@
   </form>
 
   <!-- * login/signup -->
-  <a routerLink="/login"  *ngIf="loggedIn" >
+  <a routerLink="/login"  *ngIf="!userAuthenticated">
     <button class="btn btn-secondary">Login</button>
   </a>
-  <button *ngIf="!loggedIn" class="btn btn-secondary">Logout</button>
+  <div *ngIf="userAuthenticated">
+    <a href="/user">
+      <button class="btn btn-success mx-1">{{ username }}</button>
+    </a>
+    <button class="btn btn-secondary" (click)="onLogout()">Logout</button>
+  </div>
+  <!-- <button *ngIf="!isAuth" class="btn btn-secondary">Login</button> -->
 
 </nav>

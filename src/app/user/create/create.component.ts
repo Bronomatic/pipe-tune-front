@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateService } from './create.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import abcjs from 'abcjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { async } from 'rxjs/internal/scheduler/async';
-import { promise } from 'protractor';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-create',
@@ -14,35 +12,41 @@ import { promise } from 'protractor';
   ]
 })
 export class CreateComponent implements OnInit {
-  data = {title:'New Tune',composer:'Traditional',origin:'Scotland',meter:'4/4',tempo:90};
+  data = {title:'New Tune',composer:'Traditional',origin:'Scotland',meter:'4/4',tempo:90,type:'March'};
   abcBody = '| ';
-  audioSuccess = false;
 
   addNoteValue = ['A', '1'];
+
+  userId = this.userService.getUserId();
 
   createSynth = new abcjs.synth.CreateSynth();
   synthControl = new abcjs.synth.SynthController();
   abcEditor:abcjs.Editor;
+  tuneForm: FormGroup;
 
   playing = false;
   clicked = false;
+  audioSuccess = false;
 
   showNoteBuild = true;
   showSymbolBuild = true;
   showSongForm = true;
+  showToSave = false;
+  share = true;
 
-  tuneForm: FormGroup;
 
-  constructor(private createService: CreateService, private formBuilder: FormBuilder) { }
+  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    console.log(this.userId);
     // * form group for head
     this.tuneForm = this.formBuilder.group({
       title: this.data.title,
       composer: this.data.composer,
       origin: this.data.origin,
       meter: this.data.meter,
-      tempo: this.data.tempo
+      tempo: this.data.tempo,
+      type: this.data.type
     })
     this.onChanges();
     // * Start the editor
@@ -60,7 +64,8 @@ export class CreateComponent implements OnInit {
         composer: value.composer,
         origin: value.origin,
         tempo: value.tempo,
-        meter: value.meter
+        meter: value.meter,
+        type: value.type
       }
       this.data = newData;
       this.signalChange();
@@ -167,5 +172,20 @@ export class CreateComponent implements OnInit {
   onLoop() { this.synthControl.toggleLoop(); this.clicked = !this.clicked }
 
   onRestart() { this.synthControl.restart() }
+
+  onSaveTune() {
+    // * hide interface and show abc
+    const saveData = {
+      abc: document.getElementById('abcHidden').innerHTML,
+      title: this.data.title,
+      composer: this.data.composer,
+      origin: this.data.origin,
+      meter: this.data.meter,
+      type: this.data.type,
+      share: this.share,
+      creator: this.userService.getUsername()
+    }
+    this.userService.onCreateTune(saveData);
+  }
 
 }

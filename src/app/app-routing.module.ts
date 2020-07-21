@@ -8,13 +8,14 @@ import { SignupComponent } from './user/signup/signup.component';
 import { UserComponent } from './user/user/user.component';
 import { CreateComponent } from './user/create/create.component';
 import { ViewComponent } from './view/view.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'user', component: UserComponent },
-  { path: 'create', component: CreateComponent },
+  { path: 'user', component: UserComponent , canActivate: [AuthGuard]},
+  { path: 'create', component: CreateComponent, canActivate: [AuthGuard] },
   { path: 'tune', component: ViewComponent }
 ];
 
@@ -24,6 +25,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

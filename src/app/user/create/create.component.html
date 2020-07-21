@@ -1,5 +1,7 @@
 <div class="container">
-  <h3 class="text-center my-3">Create New Tune</h3>
+  <h3 class="text-center my-3">{{ !showToSave ? 'Create New Tune' : 'Save This Tune?' }}</h3>
+</div>
+<div class="container" [hidden]="showToSave">
   <hr>
   <!-- # form -->
   <button class="btn btn-secondary btn-block btn-sm p-0" (click)="showSongForm = !showSongForm">show/hide Song Data</button>
@@ -19,9 +21,24 @@
       <input
         type="text"
         name="composer"
-        class="form-control float-right"
+        class="form-control float-right mr-2"
         formControlName="composer"
       >
+      <label for="type" class="m-2">Type</label>
+      <select name="type" class="form-control" formControlName="type">
+        <option value="Airs" selected>Airs</option>
+        <option value="Holiday" selected>Holiday</option>
+        <option value="Hornpipe" selected>Hornpipe</option>
+        <option value="Hymn" selected>Hymn</option>
+        <option value="Jig" selected>Jig</option>
+        <option value="Medley" selected>Medley</option>
+        <option value="March" selected>March</option>
+        <option value="Polka" selected>Polka</option>
+        <option value="Reel" selected>Reel</option>
+        <option value="Strathspey" selected>Strathspey</option>
+        <option value="Waltz" selected>Waltz</option>
+        <option value="Other" selected>Other</option>
+      </select>
     </div>
 
     <div *ngIf="showSongForm" class="form-group form-inline">
@@ -35,7 +52,7 @@
       >
       <!--  * Meter -->
       <label for="meter" class="mr-2">Meter (M:)</label>
-      <select name="meter" id="meter" class="mr-4" formControlName="meter">
+      <select name="meter" id="meter" class="form-control mr-4" formControlName="meter">
         <option value="2/4">2/4</option>
         <option value="3/4">3/4</option>
         <option value="4/4" selected>4/4</option>
@@ -48,12 +65,19 @@
       <input
         type="number"
         name="tempo"
-        class="form-control"
+        class="form-control mr-4"
         max="240"
         min="30"
         value=90
         formControlName="tempo"
       >
+      <label for="public" class="mr-2">Share with everyone</label>
+      <button
+        type="button"
+        class="btn btn-secondary mr-4"
+        id="share"
+        (click)="share = !share"
+      >{{ share ? 'Yes' : 'No' }}</button>
     </div>
   </form>
   <hr *ngIf="showSongForm"><!-- * end form -->
@@ -139,7 +163,9 @@
     <button id="sp" class="note btn btn-light m-1 p-2">space</button>
   </div>
   <hr *ngIf="showSymbolBuild">
+</div>
 
+<div class="container mt-2">
   <!-- # paper -->
   <div id="paper" class="card"></div>
   <!-- # audio buttons -->
@@ -167,7 +193,9 @@
   </div>
 
   <hr>
+</div>
 
+<div class="container mb-2"  [hidden]="showToSave">
   <textarea
     name="abcEdit"
     id="abcEdit"
@@ -177,12 +205,18 @@
     [(ngModel)]="abcBody"
     (ngModelChange)="signalChange()"
   ></textarea>
-  <!-- class="form-control m-2" -->
+
+  <button class="btn btn-success" (click)="showToSave = !showToSave">save</button>
+</div>
+
+<div class="container" [hidden]="!showToSave">
   <textarea
-    hidden
+    [disabled]="showToSave"
     id="abcHidden"
     cols="30"
     rows="10"
     style="width: 100%;"
     ></textarea>
+    <button class="btn btn-success m-1" (click)="onSaveTune()">Yes</button>
+    <button class="btn btn-danger m-1" (click)="showToSave = !showToSave">Not Yet</button>
 </div>
