@@ -12,6 +12,7 @@ import { SignupComponent } from './user/signup/signup.component';
 import { UserComponent } from './user/user/user.component';
 import { CreateComponent } from './user/create/create.component';
 import { ViewComponent } from './view/view.component';
+import { TuneListComponent } from './tune-list/tune-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ViewComponent } from './view/view.component';
     SignupComponent,
     UserComponent,
     CreateComponent,
-    ViewComponent
+    ViewComponent,
+    TuneListComponent
   ],
   imports: [
     BrowserModule,

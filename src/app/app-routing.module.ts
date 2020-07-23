@@ -9,6 +9,7 @@ import { UserComponent } from './user/user/user.component';
 import { CreateComponent } from './user/create/create.component';
 import { ViewComponent } from './view/view.component';
 import { AuthGuard } from './auth.guard';
+import { TuneListComponent } from './tune-list/tune-list.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'user', component: UserComponent , canActivate: [AuthGuard]},
   { path: 'create', component: CreateComponent, canActivate: [AuthGuard] },
-  { path: 'tune', component: ViewComponent }
+  { path: 'list', component: TuneListComponent }
 ];
 
 @NgModule({

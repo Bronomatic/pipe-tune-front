@@ -7,13 +7,18 @@
   font-family: 'Roboto', sans-serif;
 } */
 
+h1 {
+  text-shadow: 3px 3px 1px black;
+}
 
 a {
   padding-right: 20px;
 }
 
 .jumbotron {
-  background-image: url('../../assets/blackwatch.png');
+  /* background-image: url('../../assets/blackwatch.png'); */
+  background-image: url('../../assets//campbell-of-breadalbane-3.svg');
+  background-size: 30%;
 }
 
 .footer {

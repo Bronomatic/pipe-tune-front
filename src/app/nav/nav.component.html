@@ -5,14 +5,45 @@
   </a>
   <!-- * search form -->
   <form [formGroup]="searchForm" class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmitSearch()">
-    <select name="" id="drop" class="form-control mx-1" formControlName="searchType">
-      <option value="name" selected>Tune name</option>
-      <option value="type">Created by user</option>
+    <select name="" id="drop" class="form-control mx-1" formControlName="searchCategory">
+      <option value="title" selected>Tune title</option>
+      <option value="composer">Composer</option>
+      <option value="creator">Created by user</option>
+      <option value="meter">Meter</option>
+      <option value="type">Type</option>
     </select>
-    <input type="text" class="form-control mx-1" formControlName="searchField">
+
+    <ng-container [ngSwitch]="searchForm.value.searchCategory">
+      <!-- # meter search -->
+      <select *ngSwitchCase="'meter'" formControlName="searchMeter" class="form-control" name="" id="">
+        <option value="2/4">2/4</option>
+        <option value="3/4">3/4</option>
+        <option value="4/4" selected>4/4</option>
+        <option value="6/8">6/8</option>
+        <option value="9/8">9/8</option>
+        <option value="12/8">12/8</option>
+      </select>
+      <!-- # type search -->
+      <select *ngSwitchCase="'type'" formControlName="searchType" class="form-control" name="" id="">
+        <option value="airs">Airs</option>
+        <option value="holiday">Holiday</option>
+        <option value="hornpipe">Hornpipe</option>
+        <option value="hymn">Hymn</option>
+        <option value="jig">Jig</option>
+        <option value="medley">Medley</option>
+        <option value="march" selected>March</option>
+        <option value="polka">Polka</option>
+        <option value="reel">Reel</option>
+        <option value="strathspey">Strathspey</option>
+        <option value="waltz">Waltz</option>
+        <option value="other">Other</option>
+      </select>
+      <!-- # text search -->
+      <input *ngSwitchDefault type="text" class="form-control mx-1" formControlName="searchText">
+    </ng-container>
+
     <input type="submit" class="btn btn-success mx-1" value="Search">
   </form>
-
   <!-- * login/signup -->
   <a routerLink="/login"  *ngIf="!userAuthenticated">
     <button class="btn btn-secondary">Login</button>
@@ -23,6 +54,4 @@
     </a>
     <button class="btn btn-secondary" (click)="onLogout()">Logout</button>
   </div>
-  <!-- <button *ngIf="!isAuth" class="btn btn-secondary">Login</button> -->
-
 </nav>

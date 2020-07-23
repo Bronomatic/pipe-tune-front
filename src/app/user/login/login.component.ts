@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
-  isLoading = false;
   private authStatusSubscription: Subscription;
 
   constructor(private userService: UserService) { }
@@ -22,7 +21,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
     this.authStatusSubscription = this.userService.getAuthStatusListener().subscribe(
       authStatus => {
-        this.isLoading = false;
         console.log(authStatus);
       }
     )
@@ -35,7 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     if(this.loginForm.valid) {
-      // this.isLoading = true;
       this.userService.onLogin(userData);
     }
   }

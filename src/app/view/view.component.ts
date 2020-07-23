@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import abcjs from 'abcjs';
+import * as svg from 'save-svg-as-png';
 
 import { saveAs } from 'file-saver';
 
@@ -9,14 +11,45 @@ import { saveAs } from 'file-saver';
 })
 export class ViewComponent implements OnInit {
 
+  @Input() tune = {body:String, title:String};
+
+  renderAbc = new abcjs.renderAbc();
+
   constructor() { }
 
   ngOnInit() {
+    abcjs.renderAbc('paper', this.tune.body);
   }
 
-  saveTest() {
-    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, "hello world.txt");
+  saveAsAbc() {
+    const abcBody = this.tune.body.toString();
+    const title = this.tune.title;
+    var blob = new Blob([abcBody], {type: "abc/plain;charset=utf-8"});
+    saveAs(blob, title+'.abc');
+  }
+
+  saveAsSvg() {
+    const svgBody = document.getElementById('paper').innerHTML;
+    const title = this.tune.title;
+    var blob = new Blob([svgBody], {type: 'svg/plain;charset=utf-8'});
+    saveAs(blob, title+'.svg');
+  }
+
+  saveAsPng() {
+    const svgBody = document.getElementById('paper').firstElementChild;
+    const title = this.tune.title;
+    svg.saveSvgAsPng(svgBody, title+'.png', (uri) => {
+      console.log('some stuff ' + uri);
+    });
+  }
+
+  onPrint() {
+    const svgBody = document.getElementById('paper').firstElementChild;
+    const size = `height=${svgBody.clientHeight},width=${svgBody.clientWidth}`;
+    let a = window.open('', '', size);
+    a.document.write(`<html><body>${svgBody}</body></html>`);
+    a.document.close();
+    a.print();
   }
 
 }

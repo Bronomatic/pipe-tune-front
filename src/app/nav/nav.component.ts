@@ -18,29 +18,36 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService, private userService: UserService) { }
 
   ngOnInit() {
-    this.username = this.userService.getUsername();
-    this.userAuthenticated = this.userService.getIsAuth();
     this.authListenerSubs = this.userService.getAuthStatusListener()
-      .subscribe(isAuthenticated => {
+    .subscribe(isAuthenticated => {
+        this.username = this.userService.getUsername();
         this.userAuthenticated = isAuthenticated;
       })
     this.searchForm = new FormGroup({
-      'searchField': new FormControl(null, Validators.required),
-      'searchType': new FormControl('name', Validators.required)
+      'searchCategory': new FormControl('title', Validators.required),
+      'searchType': new FormControl('march'),
+      "searchMeter": new FormControl('4/4'),
+      'searchText': new FormControl(null),
+      'searchUser': new FormControl(null)
     });
   }
 
   onSubmitSearch() {
-    const searchData = {
-      searchValue: this.searchForm.value.searchField,
-      searchType: this.searchForm.value.searchType
+    let searchCategory = this.searchForm.value.searchCategory;
+    let searchValue: String;
+
+    if(searchCategory === 'meter'){
+      console.log(this.searchForm.value.searchMeter)
+      searchValue = this.searchForm.value.searchMeter;
+      console.log(searchValue);
+    }else if(searchCategory === 'type'){
+      searchValue = this.searchForm.value.searchType;
+    }else{
+      searchValue = this.searchForm.value.searchText;
     }
+
     if(this.searchForm.valid) {
-      return this.searchService
-        .onSearchSent(searchData)
-        .subscribe((result:Object) => {
-          // console.log(result);
-        });
+      return this.searchService.onSearch(searchCategory, searchValue);
     }
   }
 

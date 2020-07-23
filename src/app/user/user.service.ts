@@ -30,7 +30,6 @@ export class UserService {
     let url = 'http://localhost:8080/login';
     this.http.post<{token: string, expiresIn: number, userId: string, username: string}>(url, data)
       .subscribe(response => {
-        // console.log(response);
         const token = response.token;
         this.token = token;
         if(token){
@@ -54,7 +53,6 @@ export class UserService {
     let url = 'http://localhost:8080/create';
     this.http.post(url, data)
       .subscribe(response => {
-        console.log(response);
         this.router.navigate(['/user']);
       });
   }
