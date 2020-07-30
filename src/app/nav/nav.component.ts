@@ -18,18 +18,29 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService, private userService: UserService) { }
 
   ngOnInit() {
-    this.authListenerSubs = this.userService.getAuthStatusListener()
-    .subscribe(isAuthenticated => {
+    console.log('onInit');
+    this.username = this.userService.getUsername();
+    this.userAuthenticated = this.userService.getIsAuth();
+    this.authListenerSubs = this.userService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        console.log(isAuthenticated);
         this.username = this.userService.getUsername();
         this.userAuthenticated = isAuthenticated;
       })
+
     this.searchForm = new FormGroup({
       'searchCategory': new FormControl('title', Validators.required),
       'searchType': new FormControl('march'),
-      "searchMeter": new FormControl('4/4'),
+      'searchMeter': new FormControl('4/4'),
       'searchText': new FormControl(null),
       'searchUser': new FormControl(null)
     });
+  }
+
+  checkValues() {
+    console.log(this.username);
+    console.log(this.userAuthenticated);
   }
 
   onSubmitSearch() {
@@ -37,9 +48,7 @@ export class NavComponent implements OnInit, OnDestroy {
     let searchValue: String;
 
     if(searchCategory === 'meter'){
-      console.log(this.searchForm.value.searchMeter)
       searchValue = this.searchForm.value.searchMeter;
-      console.log(searchValue);
     }else if(searchCategory === 'type'){
       searchValue = this.searchForm.value.searchType;
     }else{
@@ -52,8 +61,10 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
+    console.log('logout');
     this.userService.logout();
     this.username = null;
+    this.userAuthenticated = false;
   }
 
   ngOnDestroy() {

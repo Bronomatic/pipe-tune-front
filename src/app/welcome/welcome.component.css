@@ -3,8 +3,10 @@
   /* font-family: 'Roboto', sans-serif; */
   /* src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap'); */
 }
+
+
 /* .all {
-  font-family: 'Roboto', sans-serif;
+
 } */
 
 h1 {
@@ -16,9 +18,9 @@ a {
 }
 
 .jumbotron {
-  /* background-image: url('../../assets/blackwatch.png'); */
-  background-image: url('../../assets//campbell-of-breadalbane-3.svg');
-  background-size: 30%;
+  background-image: url('../../assets/black-watch-dress-asymmetrical.svg');
+
+  background-size: 249px;
 }
 
 .footer {

@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class SearchService {
   private listListener = new Subject<any>();
+  private userTuneListener = new Subject<any>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -16,8 +17,8 @@ export class SearchService {
     const url = `http://localhost:8080/search?${queryString}`;
 
     return this.http.get<any>(url)
-      .subscribe(result => {
-        this.listListener.next(result);
+      .subscribe(response => {
+        this.listListener.next(response);
         this.router.navigate(['/list']);
       })
   }
@@ -27,9 +28,25 @@ export class SearchService {
   }
 
   getTuneById(id: String) {
-    console.log(id);
-    const url = `http://localhost:8080/tune?id=${id}`;
+    const url = `http://localhost:8080/`;
+    return this.http.get<any>(url + id)
+  }
+
+  getTuneListByIdArray(idArray:Array<string>){
+    const url =  `http://localhost:8080/search?a=${idArray.join('-')}`;
+    return this.http.get<any>(url);
+  }
+
+  getAllUsersTunes(username: String) {
+    const url = `http://localhost:8080/search?u=${username}`;
     return this.http.get<any>(url)
+      .subscribe((response => {
+        this.userTuneListener.next(response);
+      }));
+  }
+
+  getUsersTunesListener() {
+    return this.userTuneListener.asObservable();
   }
 
 }

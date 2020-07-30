@@ -1,0 +1,13 @@
+img {
+  height: 30px;
+  width: 30px;
+}
+
+.glow {
+  box-shadow: inset 0 0 16px  white;
+  background-color: grey;
+}
+
+#addNotes {
+  height: 100%;
+}

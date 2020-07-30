@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -28,7 +28,7 @@ export class UserService {
   // * login
   onLogin(data:Object) {
     let url = 'http://localhost:8080/login';
-    this.http.post<{token: string, expiresIn: number, userId: string, username: string}>(url, data)
+    this.http.post<{token: string, expiresIn: number, userId: string, username: string, favorites: Array<string>}>(url, data)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
@@ -44,16 +44,6 @@ export class UserService {
           this.saveAuthData(token, expirationDate, this.userId, this.username);
           this.router.navigate(['/']);
         }
-      });
-  }
-
-  // * save new tune
-  onCreateTune(data:Object) {
-    console.log('create service');
-    let url = 'http://localhost:8080/create';
-    this.http.post(url, data)
-      .subscribe(response => {
-        this.router.navigate(['/user']);
       });
   }
 
@@ -107,7 +97,6 @@ export class UserService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log( `Set Timer: ${duration}`);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
@@ -141,4 +130,34 @@ export class UserService {
       username
     };
   }
+
+  updateFavorites(userId:String, favorites:Array<String>, token:String) {
+    const url = 'http://localhost:8080/favorites';
+    const options = {
+      headers: new HttpHeaders({
+        "Content-Type": 'application/json',
+        "Authorization": "Bearer " + token
+      })
+    }
+    const data = {
+      userId: userId,
+      favorites: favorites
+    }
+    this.http.post(url, data, options)
+      .subscribe(response => { });
+  }
+
+  getUserFavorites(userId:String, token:String) {
+    const url = 'http://localhost:8080/favorites';
+    const options = {
+      headers: new HttpHeaders({
+        "Content-Type": 'application/json',
+        "Authorization": "Bearer " + token
+      })
+    }
+
+    return this.http.get(`${url}?id=${userId}`, options);
+  }
+
 }
+

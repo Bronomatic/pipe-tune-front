@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import abcjs from 'abcjs';
 import { UserService } from '../user.service';
+import { TuneService } from 'src/app/tune.service';
+
+import { TuneModel } from '../../tune.model';
+import { EditorComponent } from 'src/app/editor/editor.component';
 
 @Component({
   selector: 'app-create',
@@ -12,21 +14,29 @@ import { UserService } from '../user.service';
   ]
 })
 export class CreateComponent implements OnInit {
-  data = {title:'New Tune',composer:'Traditional',origin:'Scotland',meter:'4/4',tempo:90,type:'March'};
+  @ViewChild(EditorComponent, null) child;
+  username = this.userService.getUsername();
+
+  data: TuneModel = {
+    title:'New Tune',
+    composer:'Traditional',
+    origin:'Scotland',
+    meter:'4/4',
+    tempo:90,
+    type:'March',
+    creator: this.username,
+    share:true, body:''};
   abcBody = '| ';
 
   addNoteValue = ['A', '1'];
-
+  id:String;
   userId = this.userService.getUserId();
 
-  createSynth = new abcjs.synth.CreateSynth();
-  synthControl = new abcjs.synth.SynthController();
-  abcEditor:abcjs.Editor;
-  tuneForm: FormGroup;
-
-  playing = false;
-  clicked = false;
-  audioSuccess = false;
+  // createSynth = new abcjs.synth.CreateSynth();
+  // synthControl = new abcjs.synth.SynthController();
+  // previous = {loop:false, restart:false}
+  // playing = false;
+  // audioSuccess = false;
 
   showNoteBuild = true;
   showSymbolBuild = true;
@@ -34,158 +44,51 @@ export class CreateComponent implements OnInit {
   showToSave = false;
   share = true;
 
+  constructor(
+    private userService: UserService,
+    private tuneService: TuneService,
+  ) { }
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    console.log(this.userId);
-    // * form group for head
-    this.tuneForm = this.formBuilder.group({
-      title: this.data.title,
-      composer: this.data.composer,
-      origin: this.data.origin,
-      meter: this.data.meter,
-      tempo: this.data.tempo,
-      type: this.data.type
-    })
-    this.onChanges();
-    // * Start the editor
-    this.abcEditor = new abcjs.Editor(
-      "abcHidden",
-      { paper_id: "paper" }
-    )
-    this.signalChange();
+
+  onPreSave() {
+    // * hide interface and show current abc
+    this.showToSave = true;
+    this.data = this.child.data;
   }
-
-  onChanges(): void {
-    this.tuneForm.valueChanges.subscribe(value => {
-      let newData = {
-        title: value.title,
-        composer: value.composer,
-        origin: value.origin,
-        tempo: value.tempo,
-        meter: value.meter,
-        type: value.type
-      }
-      this.data = newData;
-      this.signalChange();
-    })
-  }
-
-  loadAudio(synthControl:Object) {
-    this.audioSuccess = true;
-    // * load sound
-    var audioParams = {
-      chordsOff: true
-    };
-
-    if (abcjs.synth.supportsAudio()) {
-      var visualObj = abcjs.renderAbc(
-        "paper",
-        this.abcBody,
-        { add_classes: true }
-      );
-      this.createSynth.init({ visualObj: visualObj[0] })
-        .then((synthControl:Object) => {
-          this.synthControl.setTune(visualObj[0], false, audioParams)
-            .then(() => {
-              console.log("Audio successfully loaded.");
-            }).catch((error) => {
-              console.warn("Audio problem:", error);
-            });
-        }).catch((error) => {
-          console.warn("Audio problem:", error);
-        });
-    } else {
-      document.getElementById('audio').innerHTML = 'Sorry! Audio is not supported on this browser';
-    }
-
-  }
-
-  onAddNoteValue(event) {
-    // * find parent to get button type
-    const btnValue = event.target.id;
-    if(!btnValue || btnValue === 'pitch' || btnValue === 'time'){return}
-    console.log(btnValue);
-    let parent:String;
-    (() => {
-      let currentParent = event.target.parentNode;
-      while(!currentParent.id){
-        currentParent = currentParent.parentNode;
-      }
-      parent = currentParent.id;
-    })()
-    // * change note value
-    if(parent === 'time'){
-      this.addNoteValue[1] = btnValue.split('-')[1];
-    }else if(parent === 'pitch'){
-      this.addNoteValue[0] = btnValue;
-    }
-    // * remove active from buttons
-    let noteButtons = document.getElementsByClassName('note');
-    Object.values(noteButtons).forEach(each => {
-      each.classList.remove('active');
-    })
-    // * add correct active to buttons
-    // document.getElementById(this.addNoteValue[0]).classList.add('active');
-
-    // document.getElementById(`t-${this.addNoteValue[1]}`)
-    //   .parentNode
-    //   .classList
-    //   .add('active');
-
-    // console.log(this.addNoteValue[0] + this.addNoteValue[1]);
-  }
-
-  onAddNoteToBody() {
-    this.abcBody += this.addNoteValue[0] + this.addNoteValue[1];
-    this.signalChange();
-  }
-
-  signalChange() {
-    const hiddenText = document.getElementById('abcHidden');
-    hiddenText.innerHTML = `X:1\nT: ${this.data.title}\nC: ${this.data.composer}\nS: ${this.data.origin}\nM ${this.data.meter}\nL: 1/8\nG: ${this.data.tempo}\n{{ ${this.abcBody}`;
-    const abcTextArea = document.getElementById('abcHidden');
-    abcTextArea.dispatchEvent(new Event('change'));
-  }
-
-  addStaffSymbols(event) {
-    console.log(event.target.id);
-    const data = event.target.id;
-    if(!data || data === 'symbols'){
-      return
-    }else if(data === 'nl'){
-      this.abcBody += String.fromCharCode(10);
-    }else if(data === 'sp'){
-      this.abcBody += String.fromCharCode(32);
-    }else{
-      this.abcBody += data;
-    }
-  }
-
-  onPlay() { this.synthControl.play(); this.playing = true }
-
-  onStop() { this.synthControl.pause(); this.synthControl.restart(); this.playing = false }
-
-  onPause() { this.synthControl.pause(); this.playing = false }
-
-  onLoop() { this.synthControl.toggleLoop(); this.clicked = !this.clicked }
-
-  onRestart() { this.synthControl.restart() }
 
   onSaveTune() {
-    // * hide interface and show abc
-    const saveData = {
-      abc: document.getElementById('abcHidden').innerHTML,
-      title: this.data.title,
-      composer: this.data.composer,
-      origin: this.data.origin,
-      meter: this.data.meter,
-      type: this.data.type,
-      share: this.share,
-      creator: this.userService.getUsername()
+    const token = this.userService.getToken();
+    if(!this.id){
+      // * If this is a new tune
+      this.tuneService.onCreateTune(this.data, token);
+    }else{
+      // * If this is an edit of an existing tune
     }
-    this.userService.onCreateTune(saveData);
   }
 
+/*
+  audioControlHandler(control: {play:boolean, loop:boolean, restart:boolean}) {
+    // * Play and pause
+    if(control.play && !this.playing){
+      this.playing = true;
+      this.synthControl.play();
+    }else if(!control.play && this.playing){
+      this.playing = false;
+      this.synthControl.pause();
+    }
+    // * toggle loop
+    if(control.loop !== this.previous.loop){
+      this.synthControl.toggleLoop();
+    }
+    this.previous.loop = control.loop;
+    // * restart tune
+    if(control.restart !== this.previous.restart){
+      this.synthControl.restart();
+    }
+    this.previous.restart = control.restart;
+
+  }
+*/
 }

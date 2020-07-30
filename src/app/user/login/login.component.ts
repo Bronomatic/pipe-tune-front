@@ -19,11 +19,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       'username': new FormControl(null, Validators.required),
       'password': new FormControl(null, Validators.required)
     });
-    this.authStatusSubscription = this.userService.getAuthStatusListener().subscribe(
-      authStatus => {
-        console.log(authStatus);
-      }
-    )
+    this.authStatusSubscription = this.userService
+      .getAuthStatusListener()
+      .subscribe(authStatus => { });
   }
 
   onUserLogin() {

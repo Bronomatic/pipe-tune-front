@@ -1,0 +1,18 @@
+<div class="btn bg-secondary p-0 mt-2" (click)="onButtonClick($event)">
+  <!-- * restart -->
+  <button id="restart" class="btn btn-light p-0 m-1">
+    <img src="../../../assets/btn-audio/restart.svg" class="aud" alt="restart button">
+  </button>
+  <!-- * play -->
+  <button id="play" class="btn btn-light p-0 m-1" *ngIf="!audioControl.play">
+    <img src="../../../assets/btn-audio/play.svg" class="aud" alt="play button">
+  </button>
+  <!-- * pause -->
+  <button id="pause" class="btn btn-light p-0 m-1" *ngIf="audioControl.play">
+    <img src="../../../assets/btn-audio/pause.svg" class="aud" alt="pause button">
+  </button>
+  <!-- * loop -->
+  <button id="loop" class="btn p-0 m-1" [ngClass]="{'btn-light': audioControl.loop}">
+    <img src="../../../assets/btn-audio/loop.svg" class="aud" alt="loop button">
+  </button>
+</div>

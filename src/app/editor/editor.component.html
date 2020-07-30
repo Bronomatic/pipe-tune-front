@@ -1,0 +1,202 @@
+<div class="container">
+
+  <div [hidden]="hide">
+    <!-- # Song Data -->
+    <button
+    class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0"
+    (click)="showSongForm = !showSongForm"
+    >Song Data <span class="ml-auto">{{ !showSongForm ? 'show' : 'hide' }}</span></button>
+    <form [formGroup]="tuneForm" *ngIf="showSongForm" class="border border-secondary p-2 mb-2">
+      <div class="form-group form-inline">
+        <!-- * title -->
+        <div class="col-xs form-inline mb-2">
+          <label for="title" class="mr-2">Title (T:)</label>
+          <input
+            type="text"
+            name="title"
+            class="form-control mr-4"
+            formControlName="title"
+          >
+        </div>
+        <!-- * composer -->
+        <div class="col-xs form-inline mb-2">
+          <label for="composer" class="mr-2">Composer (c:)</label>
+          <input
+            type="text"
+            name="composer"
+            class="form-control float-right mr-2"
+            formControlName="composer"
+          >
+        </div>
+        <!-- * Type -->
+        <div class="col-xs form-inline mb-2">
+          <label for="type" class="mr-2">Type</label>
+          <select name="type" class="form-control mr-2" formControlName="type">
+            <option value="Airs" selected>Airs</option>
+            <option value="Holiday" selected>Holiday</option>
+            <option value="Hornpipe" selected>Hornpipe</option>
+            <option value="Hymn" selected>Hymn</option>
+            <option value="Jig" selected>Jig</option>
+            <option value="Medley" selected>Medley</option>
+            <option value="March" selected>March</option>
+            <option value="Polka" selected>Polka</option>
+            <option value="Reel" selected>Reel</option>
+            <option value="Strathspey" selected>Strathspey</option>
+            <option value="Waltz" selected>Waltz</option>
+            <option value="Other" selected>Other</option>
+          </select>
+        </div>
+        <!-- * origin -->
+        <div class="col-xs form-inline mb-2">
+          <label for="origin" class="mr-2">Origin (S:)</label>
+          <input
+            type="text"
+            name="origin"
+            class="form-control mr-4"
+            formControlName="origin"
+          >
+        </div>
+        <!--  * Meter -->
+        <div class="col-xs form-inline mb-2">
+          <label for="meter" class="mr-2">Meter (M:)</label>
+          <select name="meter" id="meter" class="form-control mr-4" formControlName="meter">
+            <option value="2/4">2/4</option>
+            <option value="3/4">3/4</option>
+            <option value="4/4" selected>4/4</option>
+            <option value="6/8">6/8</option>
+            <option value="6/8">9/8</option>
+            <option value="6/8">12/8</option>
+          </select>
+        </div>
+        <!-- * tempo -->
+        <div class="col-xs form-inline mb-2">
+          <label for="tempo" class="mr-2">Tempo (Q:)</label>
+          <input
+            type="number"
+            name="tempo"
+            class="form-control mr-4"
+            max="240"
+            min="30"
+            value=90
+            formControlName="tempo"
+          >
+        </div>
+        <!-- * share -->
+        <div class="col-xs form-inline mb-2">
+          <label for="public" class="mr-2">Share</label>
+          <button
+            type="button"
+            class="btn btn-success mr-4"
+            id="share"
+            (click)="data.share = !data.share"
+            [ngClass]="{'btn-danger':!data.share}"
+          >{{ data.share ? 'Yes' : 'No' }}</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- # Note Builder -->
+    <button
+      class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0"
+      (click)="showNoteBuild = !showNoteBuild"
+    >Notes<span class="ml-auto">{{ !showNoteBuild ? 'show' : 'hide' }}</span></button>
+    <div *ngIf="showNoteBuild" class="border border-secondary p-2 mb-2">
+      <div
+        style="display: inline-block;"
+        (click)="onAddNoteValue($event)"
+      >
+        <!-- * pitch buttons -->
+        <div id="pitch" class="btn btn-row bg-secondary p-0 mb-1">
+          <button id="G" class="note btn btn-light m-1 btn-sm">G</button>
+          <button id="A" class="note btn btn-light m-1 btn-sm glow">A</button>
+          <button id="B" class="note btn btn-light m-1 btn-sm">B</button>
+          <button id="c" class="note btn btn-light m-1 btn-sm">C</button>
+          <button id="d" class="note btn btn-light m-1 btn-sm">D</button>
+          <button id="e" class="note btn btn-light m-1 btn-sm">E</button>
+          <button id="f" class="note btn btn-light m-1 btn-sm">F</button>
+          <button id="g" class="note btn btn-light m-1 btn-sm">G</button>
+          <button id="a" class="note btn btn-light m-1 btn-sm">A</button>
+        </div>
+        <br>
+        <!-- * time buttons -->
+        <div id="time" class="btn btn-row bg-secondary p-0">
+          <button id="t-8" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/whole.svg" alt="">
+          </button>
+          <button id="t-6" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/half_dot.svg" alt="">
+          </button>
+          <button id="t-4" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/half.svg" alt="e">
+          </button>
+          <button id="t-3" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/quarter_dot.svg" alt="">
+          </button>
+          <button id="t-2" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/quarter.svg" alt="">
+          </button>
+          <button id="t-3/2" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/eight_dot.svg" alt="e">
+          </button>
+          <button id="t-1" class="note btn btn-light m-1 p-0 glow">
+            <img src="../../../assets/btn-notes/eight.svg" alt="">
+          </button>
+          <button id="t-3/4" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/sixteen_dot.svg" alt="">
+          </button>
+          <button id="t-1/2" class="note btn btn-light m-1 p-0">
+            <img src="../../../assets/btn-notes/sixteen.svg" alt="">
+          </button>
+        </div>
+  
+        <!-- * add note button -->
+      </div>
+      <button
+        id="addNotes"
+        class="btn btn-dark btn-lg m-3"
+        style="display: inline-block;"
+        (click)="onAddNoteToBody()"
+      >{{ addNoteValue[0] }} {{ addNoteValue[1] }}</button>
+  
+    </div>
+
+    <!-- # Symbols -->
+    <button
+      class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0"
+      (click)="showSymbols = !showSymbols"
+    >Staff Symbols<span class="ml-auto">{{ !showSymbols ? 'show' : 'hide' }}</span></button>
+    <div *ngIf="showSymbols" class="border border-secondary  p-2 mb-2">
+      <div class="" (click)="onAddSymbols($event)">
+        <button id="|" class="note btn btn-secondary m-1 p-2">|</button>
+        <button id="|:" class="note btn btn-secondary m-1 p-2">|:</button>
+        <button id=":|" class="note btn btn-secondary m-1 p-2">:|</button>
+        <button id="||" class="note btn btn-secondary m-1 p-2">|<strong>|</strong></button>
+        <button id="new-line" class="note btn btn-secondary m-1 p-2">new line</button>
+        <button id="space" class="note btn btn-secondary m-1 p-2">space</button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div id="paper" class="bg-white border my-1">Oops! There appears to be an error.</div>
+
+  <textarea
+    id="abcBody"
+    class="form-control"
+    cols="30"
+    rows="10"
+    [hidden]="hide"
+    [(ngModel)]="tuneBody"
+    (ngModelChange)="signalChange()"
+  ></textarea>
+
+  <textarea
+    id="abcHidden"
+    class="form-control"
+    cols="30"
+    rows="10"
+    [disabled]="false"
+    [hidden]="true"
+  ></textarea>
+
+</div>

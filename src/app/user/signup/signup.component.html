@@ -2,7 +2,7 @@
   <h3 class="text-center my-3">Signup</h3>
   <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" name="email" formControlName="email">
+    <input type="email" class="form-control" name="email" formControlName="email" autofocus>
     <hr>
     <label for="username">Username</label>
     <input type="text" class="form-control" name="username" formControlName="username">

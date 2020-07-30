@@ -7,7 +7,6 @@ import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { UserComponent } from './user/user/user.component';
 import { CreateComponent } from './user/create/create.component';
-import { ViewComponent } from './view/view.component';
 import { AuthGuard } from './auth.guard';
 import { TuneListComponent } from './tune-list/tune-list.component';
 

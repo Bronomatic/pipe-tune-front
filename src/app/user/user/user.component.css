@@ -1,0 +1,37 @@
+.delete-modal {
+  display: inline-block;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,.35);
+}
+
+.delete-modal-body {
+  border: 10px solid rgb(200,0,0);
+  box-shadow: 3px 3px 6px rgba(0,0,0,.5);
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: white;
+}
+
+.delete-modal-body h4 {
+  color: rgb(200,0,0);
+}
+
+.delete-modal-body button {
+  color: white;
+  font-weight: bolder;
+}
+
+.delete-button {
+  background-color: rgb(200,0,0);
+}
+
+.delete-button:hover {
+  background-color: rgb(150,0,0);
+}

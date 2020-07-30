@@ -13,6 +13,8 @@ import { UserComponent } from './user/user/user.component';
 import { CreateComponent } from './user/create/create.component';
 import { ViewComponent } from './view/view.component';
 import { TuneListComponent } from './tune-list/tune-list.component';
+import { AudioInterfaceComponent } from './audio-interface/audio-interface.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,16 @@ import { TuneListComponent } from './tune-list/tune-list.component';
     UserComponent,
     CreateComponent,
     ViewComponent,
-    TuneListComponent
+    TuneListComponent,
+    AudioInterfaceComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

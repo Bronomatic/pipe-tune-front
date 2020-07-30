@@ -1,12 +1,17 @@
-<div *ngIf="!singleView" class="container">
-  <div *ngFor="let each of eachTune" class="card-body bg-white m-1">
-    <p class="card-title m-2"><strong>{{ each.title }}</strong></p>
+<div *ngIf="!singleView" class="container mt-2">
+  <div *ngFor="let each of eachTune" class="card-body bg-white m-1" style="box-shadow: 1px 1px 3px grey;">
+    <h5 class="card-title text-success m-2">{{ each.title }}</h5>
     <div class="d-flex">
-      <p class="card-text m-2">{{ each.type }} | {{ each.meter }} | by: {{ each.composer }} | {{ each.meter }} | Added by: {{ each.creator }}</p>
+      <p class="card-text m-2">{{ each.type }} | {{ each.meter }} | by: {{ each.composer }} | Added by: {{ each.creator }}</p>
       <div class="ml-auto">
         <button class="btn btn-success m-1" (click)="onView(each._id)">View</button>
         <button *ngIf="each.creator === username && isAuth" class="btn btn-success m-1">Edit</button>
-        <button *ngIf="isAuth" class="btn btn-danger">♥</button>
+        <button
+          *ngIf="isAuth && favorites"
+          class="btn btn-outline-danger m-1"
+          (click)="onFavorite(each._id)"
+          [ngClass]="{'btn-danger text-white': favorites.indexOf(each._id) >= 0}"
+        >♥</button>
       </div>
     </div>
   </div>
@@ -20,7 +25,12 @@
 <div *ngIf="singleView" class="container">
   <div *ngIf="tune" class="card-body bg-white mt-2" style="border: 1px solid transparent;">
     <div class="d-flex">
-      <button class="btn btn-secondary ml-auto" (click)="singleView = false">X</button>
+      <button
+        class="btn btn-outline-danger m-1"
+        (click)="onFavorite(tune.id)"
+        [ngClass]="{'btn-danger text-white': favorites.indexOf(tune.id) >= 0}"
+      >♥</button>
+      <button class="btn btn-secondary ml-auto mb-1" (click)="singleView = false">X</button>
     </div>
     <app-view [tune]="tune"></app-view>
 

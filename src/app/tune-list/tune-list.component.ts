@@ -13,13 +13,23 @@ export class TuneListComponent implements OnInit, OnDestroy {
   username: String;
   isAuth = false;
   singleView = false;
-  tune: Object;
+  tune: {body:String, title:String, id:String};
+  favorites:Array<String>;
+  private userId: String;
+  private token: String;
 
   eachTune = [];
 
   constructor(private searchService: SearchService, private userService: UserService) { }
 
   ngOnInit() {
+    this.userId = this.userService.getUserId();
+    this.token = this.userService.getToken();
+    this.userService.getUserFavorites(this.userId, this.token)
+      .subscribe((result:{message:String,favorites:Array<String>}) => {
+        this.favorites = result.favorites;
+      });
+
     this.isAuth = this.userService.getIsAuth();
     this.username = this.userService.getUsername();
     this.listSub = this.searchService.getListListener()
@@ -33,20 +43,31 @@ export class TuneListComponent implements OnInit, OnDestroy {
       })
   }
 
-    onView(id: String) {
-      console.log(id);
-      this.singleView = true;
-      this.searchService.getTuneById(id)
-        .subscribe(response => {
-          this.tune = {
-            body: response.result.body,
-            title: response.result.title
-          };
-        });
-    }
+  onView(id: String) {
+    this.singleView = true;
+    this.searchService.getTuneById(id)
+      .subscribe(response => {
+        this.tune = {
+          body: response.result.body,
+          title: response.result.title,
+          id: response.result._id
+        };
+      });
+  }
 
-    ngOnDestroy() {
-      this.listSub.unsubscribe();
+  onFavorite(id:String) {
+    const extant = this.favorites.indexOf(id);
+    if(extant < 0){
+      this.favorites.push(id);
+    }else{
+      this.favorites.splice(extant, 1);
     }
+    const token = this.userService.getToken()
+    this.userService.updateFavorites(this.userId, this.favorites, token);
+  }
+
+  ngOnDestroy() {
+    this.listSub.unsubscribe();
+  }
 
 }

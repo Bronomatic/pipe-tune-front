@@ -3,6 +3,7 @@ import abcjs from 'abcjs';
 import * as svg from 'save-svg-as-png';
 
 import { saveAs } from 'file-saver';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-view',
@@ -10,15 +11,15 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-
-  @Input() tune = {body:String, title:String};
-
+  @Input() tune = {body:String, title:String, id:String};
   renderAbc = new abcjs.renderAbc();
+  userId: String;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     abcjs.renderAbc('paper', this.tune.body);
+    this.userId = this.userService.getUserId();
   }
 
   saveAsAbc() {
@@ -38,9 +39,7 @@ export class ViewComponent implements OnInit {
   saveAsPng() {
     const svgBody = document.getElementById('paper').firstElementChild;
     const title = this.tune.title;
-    svg.saveSvgAsPng(svgBody, title+'.png', (uri) => {
-      console.log('some stuff ' + uri);
-    });
+    svg.saveSvgAsPng(svgBody, title+'.png', (uri) => {});
   }
 
   onPrint() {

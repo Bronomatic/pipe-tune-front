@@ -7,7 +7,6 @@ import { UserService } from './user/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'pipe-tune-front';
 
   constructor(private userService: UserService) { }
 
