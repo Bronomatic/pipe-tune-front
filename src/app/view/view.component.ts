@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import abcjs from 'abcjs';
 import * as svg from 'save-svg-as-png';
 
@@ -11,7 +11,8 @@ import { UserService } from '../user/user.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-  @Input() tune = {body:String, title:String, id:String};
+  @Input() tune: { body:String, title:String, id:String };
+  @Output() tuneBody: { body:String }
   renderAbc = new abcjs.renderAbc();
   userId: String;
 
@@ -20,6 +21,7 @@ export class ViewComponent implements OnInit {
   ngOnInit() {
     abcjs.renderAbc('paper', this.tune.body);
     this.userId = this.userService.getUserId();
+    this.tuneBody = {body: this.tune.body};
   }
 
   saveAsAbc() {

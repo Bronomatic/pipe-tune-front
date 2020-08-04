@@ -1,18 +1,57 @@
-<div class="btn bg-secondary p-0 mt-2" (click)="onButtonClick($event)">
+<div
+  class="btn bg-secondary p-1 mt-2"
+  >
+  <!-- * progress bar -->
+  <div class="btn btn-light btn-block p-0 mb-1">
+    <div
+      id="progress-bar"
+      class="bg-primary m-0 py-1"
+      [style.width]="(synthControl.percent * 100) + 'px'"
+      ></div>
+  </div>
   <!-- * restart -->
-  <button id="restart" class="btn btn-light p-0 m-1">
-    <img src="../../../assets/btn-audio/restart.svg" class="aud" alt="restart button">
+  <button id="restart" class="btn btn-light p-0 mr-1">
+    <img
+      src="../../../assets/btn-audio/restart.svg"
+      class="aud"
+      alt="restart button"
+      (click)="synthControl.restart()"
+    >
   </button>
   <!-- * play -->
-  <button id="play" class="btn btn-light p-0 m-1" *ngIf="!audioControl.play">
-    <img src="../../../assets/btn-audio/play.svg" class="aud" alt="play button">
+  <button
+    id="play"
+    class="btn btn-light p-0 mr-1"
+    *ngIf="!isPlaying"
+    (click)="synthControl.play(); isPlaying=true"
+  >
+    <img
+      src="../../../assets/btn-audio/play.svg"
+      class="aud"
+      alt="play button"
+    >
   </button>
   <!-- * pause -->
-  <button id="pause" class="btn btn-light p-0 m-1" *ngIf="audioControl.play">
-    <img src="../../../assets/btn-audio/pause.svg" class="aud" alt="pause button">
+  <button
+  *ngIf="isPlaying"
+    id="pause"
+    class="btn btn-light p-0 mr-1"
+    (click)="synthControl.play(); isPlaying=false"
+    >
+    <img
+      src="../../../assets/btn-audio/pause.svg"
+      class="aud"
+      alt="pause button"
+    >
   </button>
   <!-- * loop -->
-  <button id="loop" class="btn p-0 m-1" [ngClass]="{'btn-light': audioControl.loop}">
+  <button
+    id="loop"
+    class="btn p-0"
+    (click)="synthControl.toggleLoop(); isLooping=!isLooping"
+    [ngClass]="{'btn-light': isLooping}"
+    >
     <img src="../../../assets/btn-audio/loop.svg" class="aud" alt="loop button">
   </button>
 </div>
+<div id="audio"></div>
