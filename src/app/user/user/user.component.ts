@@ -12,9 +12,9 @@ import { TuneService } from 'src/app/tune.service';
 })
 export class UserComponent implements OnInit, OnDestroy {
   private userTuneSub: Subscription;
-  username = this.userService.getUsername();
   private userId = this.userService.getUserId();
   private token = this.userService.getToken();
+  username = this.userService.getUsername();
   userTunes = [];
   userFavorites = [];
   favorites:Array<string>;
@@ -52,13 +52,16 @@ export class UserComponent implements OnInit, OnDestroy {
 
   getUserFavorites() {
     this.userService.getUserFavorites(this.userId, this.token)
-    .subscribe((response:{message:String, favorites:Array<string>}) => {
-      this.favorites = response.favorites;
-      this.searchService.getTuneListByIdArray(this.favorites)
-        .subscribe(response => {
-          this.userFavorites = response.result;
-        });
-    });
+      .subscribe((response:{message:String, favorites:Array<string>}) => {
+        this.favorites = response.favorites;
+        this.searchService.getTuneListByIdArray(this.favorites)
+          .subscribe(response => {
+              const keys = Object.keys(response.result);
+              for(let each of keys){
+                this.userFavorites.push(response.result[each]);
+              }
+            });
+      });
   }
 
   onView(id: String) {
@@ -99,5 +102,9 @@ export class UserComponent implements OnInit, OnDestroy {
     this.favorites.splice(index, 1);
     this.userService.updateFavorites(this.userId, this.favorites, this.token);
     this.getUserFavorites();
+  }
+
+  onEdit(id: String) {
+    this.tuneService.editTune(id);
   }
 }

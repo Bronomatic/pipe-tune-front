@@ -1,11 +1,15 @@
 <div *ngIf="!singleView" class="container mt-2">
   <div *ngFor="let each of eachTune" class="card-body bg-white m-1" style="box-shadow: 1px 1px 3px grey;">
-    <h5 class="card-title text-success m-2">{{ each.title }}</h5>
+    <h5 class="card-title text-primary m-2">{{ each.title }}</h5>
     <div class="d-flex">
       <p class="card-text m-2">{{ each.type }} | {{ each.meter }} | by: {{ each.composer }} | Added by: {{ each.creator }}</p>
       <div class="ml-auto">
-        <button class="btn btn-success m-1" (click)="onView(each._id)">View</button>
-        <button *ngIf="each.creator === username && isAuth" class="btn btn-success m-1">Edit</button>
+        <button class="btn btn-primary m-1" (click)="onView(each._id)">View</button>
+        <button
+          *ngIf="each.creator === username && isAuth"
+          class="btn btn-primary m-1"
+          (click)="onEdit(each._id)"
+        >Edit</button>
         <button
           *ngIf="isAuth && favorites"
           class="btn btn-outline-danger m-1"

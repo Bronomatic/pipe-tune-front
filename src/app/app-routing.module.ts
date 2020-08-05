@@ -1,4 +1,4 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { UserComponent } from './user/user/user.component';
 import { CreateComponent } from './user/create/create.component';
 import { AuthGuard } from './auth.guard';
 import { TuneListComponent } from './tune-list/tune-list.component';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'user', component: UserComponent , canActivate: [AuthGuard]},
   { path: 'create', component: CreateComponent, canActivate: [AuthGuard] },
+  { path: 'edit', component: EditComponent, canActivate: [AuthGuard] },
   { path: 'list', component: TuneListComponent }
 ];
 

@@ -12,6 +12,7 @@ import abcjs from 'abcjs';
 export class EditorComponent implements OnInit {
   @Input() data: TuneModel;
   @Input() hide: Boolean;
+  @Input() edit: Boolean;
 
   tuneForm: FormGroup;
   abcEditor: abcjs.Editor;
@@ -22,14 +23,13 @@ export class EditorComponent implements OnInit {
   showNoteBuild = true;
   showSymbols = true;
 
-  tuneBody = '| ';
+  tuneBody = '';
   fullTune = '';
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.tuneForm = this.formBuilder.group({
-      creator: this.data.creator,
       title: this.data.title,
       composer: this.data.composer,
       origin: this.data.origin,
@@ -39,6 +39,8 @@ export class EditorComponent implements OnInit {
       tempo: this.data.tempo,
       body: this.data.body,
     })
+    const filteredBody = this.data.body.split('HP\n')[1];
+    this.tuneBody = filteredBody ? filteredBody : '| ';
     this.onChanges();
 
     // * create editor
@@ -115,7 +117,6 @@ export class EditorComponent implements OnInit {
     const abcHidden = document.getElementById('abcHidden');
     this.data.body = abcHidden.innerHTML = `X:1\nT:${this.data.title}\nC:${this.data.composer}\nS:${this.data.origin}\nM:${this.data.meter}\nL:1/8\nQ:1/4=${this.data.tempo}\nK:HP\n${this.tuneBody}`;
     abcHidden.dispatchEvent(new Event('change'));
-    // this.loadAudio(this.synthControl);
   }
 
 }

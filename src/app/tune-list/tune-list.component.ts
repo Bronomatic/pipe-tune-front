@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../search.service';
 import { UserService } from '../user/user.service';
+import { TuneService } from '../tune.service';
 
 @Component({
   selector: 'app-tune-list',
@@ -13,14 +14,18 @@ export class TuneListComponent implements OnInit, OnDestroy {
   username: String;
   isAuth = false;
   singleView = false;
-  tune: {body:String, title:String, id:String};
+  tune: { body:String, title:String, id:String };
   favorites:Array<String>;
   private userId: String;
   private token: String;
 
   eachTune = [];
 
-  constructor(private searchService: SearchService, private userService: UserService) { }
+  constructor(
+    private searchService: SearchService,
+    private userService: UserService,
+    private tuneService: TuneService
+  ) { }
 
   ngOnInit() {
     this.userId = this.userService.getUserId();
@@ -64,6 +69,10 @@ export class TuneListComponent implements OnInit, OnDestroy {
     }
     const token = this.userService.getToken()
     this.userService.updateFavorites(this.userId, this.favorites, token);
+  }
+
+  onEdit(id:String) {
+    this.tuneService.editTune(id);
   }
 
   ngOnDestroy() {

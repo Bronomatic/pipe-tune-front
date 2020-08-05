@@ -1,0 +1,16 @@
+<app-title [display]="!showToSave ? 'Tune Editor' : 'Update This Tune?'"></app-title>
+
+<app-editor
+  [data]="data"
+  [hide]="showToSave"
+></app-editor>
+
+<div class="container" *ngIf="!showToSave">
+  <button class="btn btn-primary my-2" (click)="showToSave=true">Update</button>
+</div>
+
+<div class="container" *ngIf="showToSave">
+  <pre class="bg-white border p-2">{{ data.body }}</pre>
+  <button class="btn btn-primary m-1" (click)="onUpdateTune()">Yes</button>
+  <button class="btn btn-danger m-1" (click)="showToSave=false">Not Yet</button>
+</div>

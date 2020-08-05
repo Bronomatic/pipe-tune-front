@@ -17,10 +17,15 @@ export class SearchService {
     const url = `http://localhost:8080/search?${queryString}`;
 
     return this.http.get<any>(url)
-      .subscribe(response => {
-        this.listListener.next(response);
-        this.router.navigate(['/list']);
-      })
+      .subscribe(
+        response => {
+          this.listListener.next(response);
+          this.router.navigate(['/list']);
+        },
+        error => {
+          this.listListener.next({result: {}});
+        }
+      )
   }
 
   getListListener() {

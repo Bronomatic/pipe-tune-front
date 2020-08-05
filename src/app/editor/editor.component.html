@@ -86,7 +86,7 @@
           <label for="public" class="mr-2">Share</label>
           <button
             type="button"
-            class="btn btn-success mr-4"
+            class="btn btn-primary mr-4"
             id="share"
             (click)="data.share = !data.share"
             [ngClass]="{'btn-danger':!data.share}"
@@ -148,7 +148,7 @@
             <img src="../../../assets/btn-notes/sixteen.svg" alt="">
           </button>
         </div>
-  
+
         <!-- * add note button -->
       </div>
       <button
@@ -157,7 +157,7 @@
         style="display: inline-block;"
         (click)="onAddNoteToBody()"
       >{{ addNoteValue[0] }} {{ addNoteValue[1] }}</button>
-  
+
     </div>
 
     <!-- # Symbols -->
@@ -170,7 +170,7 @@
         <button id="|" class="note btn btn-secondary m-1 p-2">|</button>
         <button id="|:" class="note btn btn-secondary m-1 p-2">|:</button>
         <button id=":|" class="note btn btn-secondary m-1 p-2">:|</button>
-        <button id="||" class="note btn btn-secondary m-1 p-2">|<strong>|</strong></button>
+        <button id="|]" class="note btn btn-secondary m-1 p-2">|<strong>|</strong></button>
         <button id="new-line" class="note btn btn-secondary m-1 p-2">new line</button>
         <button id="space" class="note btn btn-secondary m-1 p-2">space</button>
       </div>
@@ -179,6 +179,7 @@
   </div>
 
   <div id="paper" class="bg-white border my-1">Oops! There appears to be an error.</div>
+  <app-audio-interface [tuneBody]="data.body"></app-audio-interface>
 
   <textarea
     id="abcBody"

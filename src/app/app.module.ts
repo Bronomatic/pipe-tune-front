@@ -15,6 +15,8 @@ import { ViewComponent } from './view/view.component';
 import { TuneListComponent } from './tune-list/tune-list.component';
 import { AudioInterfaceComponent } from './audio-interface/audio-interface.component';
 import { EditorComponent } from './editor/editor.component';
+import { TitleComponent } from './title/title.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { EditorComponent } from './editor/editor.component';
     ViewComponent,
     TuneListComponent,
     AudioInterfaceComponent,
-    EditorComponent
+    EditorComponent,
+    TitleComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

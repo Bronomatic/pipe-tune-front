@@ -18,13 +18,11 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService, private userService: UserService) { }
 
   ngOnInit() {
-    console.log('onInit');
     this.username = this.userService.getUsername();
     this.userAuthenticated = this.userService.getIsAuth();
     this.authListenerSubs = this.userService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
-        console.log(isAuthenticated);
         this.username = this.userService.getUsername();
         this.userAuthenticated = isAuthenticated;
       })
@@ -36,11 +34,6 @@ export class NavComponent implements OnInit, OnDestroy {
       'searchText': new FormControl(null),
       'searchUser': new FormControl(null)
     });
-  }
-
-  checkValues() {
-    console.log(this.username);
-    console.log(this.userAuthenticated);
   }
 
   onSubmitSearch() {
@@ -61,7 +54,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    console.log('logout');
     this.userService.logout();
     this.username = null;
     this.userAuthenticated = false;

@@ -9,54 +9,45 @@ import abcjs from 'abcjs';
 })
 export class AudioInterfaceComponent implements OnInit, OnDestroy {
   @Output() audioControlEvent: EventEmitter<Object> = new EventEmitter();
-  @Input() tuneBody:{ body:String };
+  @Input() tuneBody:String;
+  // @Input() test:Observable<String>;
 
   synthControl = new abcjs.synth.SynthController();
   createSynth = new abcjs.synth.CreateSynth();
 
+  audioSuccess = false;
   isPlaying = false;
   isLooping = false;
 
   constructor() { }
 
-  prog() {
-    console.log(this.synthControl.percent * 100);
-    console.log(this.createSynth.isRunning);
-  }
-
   ngOnInit() {
-
-    this.loadAudio(this.synthControl);
+    this.loadAudio(this.synthControl, this.audioSuccess);
   }
 
-  loadAudio(synthControl) {
+  loadAudio(synthControl, audioSuccess) {
     var cursorControl = {};
     var abcOptions = { add_classes: true };
     var audioParams = { chordsOff: true };
 
     if (abcjs.synth.supportsAudio()) {
-      synthControl.load("#audio",
-            cursorControl,
-            {
-                // displayLoop: true,
-                // displayRestart: true,
-                // displayPlay: true,
-                // displayProgress: true,
-                // displayWarp: true
-            }
-        );
+      synthControl.load("#audio", cursorControl, {});
 
-      var visualObj = abcjs.renderAbc("paper", this.tuneBody.body, abcOptions);
+      var visualObj = abcjs.renderAbc("paper", this.tuneBody, abcOptions);
 
-      this.createSynth.init({ visualObj: visualObj[0] }).then(function () {
-        synthControl.setTune(visualObj[0], false, audioParams).then(function () {
-          console.log("Audio successfully loaded.")
-        }).catch(function (error) {
+      this.createSynth.init({ visualObj: visualObj[0] })
+        .then(() => {
+          synthControl.setTune(visualObj[0], false, audioParams)
+            .then(() => {
+              this.audioSuccess = this.createSynth.flattened.totalDuration >0 ? true : false;
+              console.log("Audio successfully loaded.")
+            }).catch((error) => {
+              console.warn("Audio problem:", error);
+            });
+        }).catch((error) => {
           console.warn("Audio problem:", error);
         });
-      }).catch(function (error) {
-        console.warn("Audio problem:", error);
-      });
+
     } else {
       document.querySelector("#audio").innerHTML = "Audio is not supported in this browser.";
     }

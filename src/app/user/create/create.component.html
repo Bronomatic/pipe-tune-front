@@ -1,19 +1,17 @@
-<div class="container">
-  <h3 class="text-center my-3">{{ !showToSave ? 'Create New Tune' : 'Save This Tune?' }}</h3>
-</div>
-<hr>
+<app-title [display]="!showToSave ? 'Create New Tune' : 'Save This Tune?'"></app-title>
 
 <app-editor
   [data]="data"
   [hide]="showToSave"
+  [edit]="false"
 ></app-editor>
 
 <div class="container" *ngIf="!showToSave">
-  <button class="btn btn-success my-2" (click)="onPreSave()">save</button>
+  <button class="btn btn-primary my-2" (click)="showToSave=true">Save</button>
 </div>
 
 <div class="container" *ngIf="showToSave">
   <pre class="bg-white border p-2">{{ data.body }}</pre>
-  <button class="btn btn-success m-1" (click)="onSaveTune()">Yes</button>
-  <button class="btn btn-danger m-1" (click)="showToSave = !showToSave">Not Yet</button>
+  <button class="btn btn-primary m-1" (click)="onSaveTune()">Yes</button>
+  <button class="btn btn-danger m-1" (click)="showToSav =false">Not Yet</button>
 </div>

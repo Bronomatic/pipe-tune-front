@@ -1,11 +1,12 @@
 <div
+  *ngIf="audioSuccess else error"
   class="btn bg-secondary p-1 mt-2"
-  >
+>
   <!-- * progress bar -->
   <div class="btn btn-light btn-block p-0 mb-1">
     <div
       id="progress-bar"
-      class="bg-primary m-0 py-1"
+      class="bg-secondary m-0 py-1"
       [style.width]="(synthControl.percent * 100) + 'px'"
       ></div>
   </div>
@@ -55,3 +56,7 @@
   </button>
 </div>
 <div id="audio"></div>
+
+<ng-template #error>
+  <div class="my-1">Sorry. This browser does not support audio.</div>
+</ng-template>

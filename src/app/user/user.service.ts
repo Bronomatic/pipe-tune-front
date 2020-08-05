@@ -40,7 +40,7 @@ export class UserService {
           this.username = response.username;
           this.authStatusListener.next(true);
           const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000 * 6);
           this.saveAuthData(token, expirationDate, this.userId, this.username);
           this.router.navigate(['/']);
         }

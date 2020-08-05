@@ -1,7 +1,7 @@
 <nav class="navbar navbar-extend-lg navbar-dark bg-dark">
   <!-- * title -->
   <a routerLink="/" class="navbar-brand">
-    <h3 class="text-primary">Tune Search</h3>
+    <h3 class="text-secondary">Tune Search</h3>
   </a>
   <!-- * search form -->
   <form [formGroup]="searchForm" class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmitSearch()">
@@ -42,7 +42,7 @@
       <input *ngSwitchDefault type="text" class="form-control mx-1" formControlName="searchText">
     </ng-container>
 
-    <input type="submit" class="btn btn-success mx-1" value="Search">
+    <input type="submit" class="btn btn-primary mx-1" value="Search">
   </form>
   <!-- * login/signup -->
   <a routerLink="/login" *ngIf="!userAuthenticated">
@@ -50,7 +50,7 @@
   </a>
   <div *ngIf="userAuthenticated">
     <a href="/user">
-      <button class="btn btn-success mx-1">{{ username }}</button>
+      <button class="btn btn-primary mx-1">{{ username }}</button>
     </a>
     <button class="btn btn-secondary" (click)=onLogout()>Logout</button>
   </div>
