@@ -3,7 +3,7 @@
   <div [hidden]="hide">
     <!-- # Song Data -->
     <button
-    class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0"
+    class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0 border border-dark"
     (click)="showSongForm = !showSongForm"
     >Song Data <span class="ml-auto">{{ !showSongForm ? 'show' : 'hide' }}</span></button>
     <form [formGroup]="tuneForm" *ngIf="showSongForm" class="border border-secondary p-2 mb-2">
@@ -97,7 +97,7 @@
 
     <!-- # Note Builder -->
     <button
-      class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0"
+      class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0 border border-dark"
       (click)="showNoteBuild = !showNoteBuild"
     >Notes<span class="ml-auto">{{ !showNoteBuild ? 'show' : 'hide' }}</span></button>
     <div *ngIf="showNoteBuild" class="border border-secondary p-2 mb-2">
@@ -156,13 +156,89 @@
         class="btn btn-dark btn-lg m-3"
         style="display: inline-block;"
         (click)="onAddNoteToBody()"
-      >{{ addNoteValue[0] }} {{ addNoteValue[1] }}</button>
+      >Add: {{ addNoteValue[0] }} {{ addNoteValue[1] }}</button>
 
     </div>
 
+    <!-- @ Grace Note Builder -->
+    <button
+      class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0 border border-dark"
+      (click)="showGraceBuild = !showGraceBuild"
+    >Grace Notes<span class="ml-auto">{{ !showGraceBuild ? 'show' : 'hide' }}</span></button>
+    <!-- @ -->
+    
+    <form
+    *ngIf="showGraceBuild"
+    [formGroup]="graceForm"
+    class="form-inline border border-secondary p-2 mb-2"
+    >
+      <!-- * grace type -->
+      <label for="graceType" class="mr-2">Grace Note Type</label>
+      <select class="form-control mr-2" formControlName="graceType">
+        <option value="single">Single</option>
+        <option value="doubling">Doubling</option>
+        <option value="throw">Throw</option>
+        <option value="grip">Grip</option>
+        <option value="rodin">Rodin</option>
+        <option value="birl">Birl</option>
+        <option value="taorluaths">Taorluaths</option>
+      </select>
+      <!-- * each grace type -->
+      <ng-container [ngSwitch]="graceForm.value.graceType">
+        <!-- single -->
+        <select *ngSwitchCase="'single'" formControlName="graceSingle" class="form-control">
+          <option value="{a}">High A</option>
+          <option value="{g}">High G</option>
+          <option value="{f}">F</option>
+          <option value="{e}">E</option>
+          <option value="{d}">D</option>
+          <option value="{c}">C</option>
+          <option value="{B}">B</option>
+          <option value="{A}">Low A</option>
+          <option value="{G}">Low G</option>
+        </select>
+        <!-- doubling -->
+        <select *ngSwitchCase="'doubling'" formControlName="graceDoubling" class="form-control">
+          <option value="{ag}">High A</option>
+          <option value="{gf}">High G</option>
+          <option value="{gfg}">F</option>
+          <option value="{gef}">E</option>
+          <option value="{gde}">D</option>
+          <option value="{gcd}">C</option>
+          <option value="{gBd}">B</option>
+          <option value="{gAd}">Low A</option>
+          <option value="{gGd}">Low G</option>
+        </select>
+        <!-- throw -->
+        <select *ngSwitchCase="'throw'" formControlName="graceThrow" class="form-control">
+          <option value="{Gdc}">On D</option>
+        </select>
+        <!-- grip -->
+        <select *ngSwitchCase="'grip'" formControlName="graceGrip" class="form-control">
+          <option value="{Gdc}">Regular</option>
+          <option value="{GBG}">With B (Rodin)</option>
+        </select>
+        <!-- rodin -->
+        <select *ngSwitchCase="'rodin'" formControlName="graceRodin" class="form-control">
+          <option value="{GBG}">Grip with B</option>
+        </select>
+        <!-- birl -->
+        <select *ngSwitchCase="'birl'" formControlName="graceBirl" class="form-control">
+          <option value="{AGAG}">Regular</option>
+          <option value="{gAGAG}">With G</option>
+        </select>
+        <!-- taorluaths -->
+        <select *ngSwitchCase="'taorluaths'" formControlName="graceTaorluaths" class="form-control">
+          <option value="{GdGe}">Regular</option>
+        </select>
+      </ng-container>
+      <div class="border border-secondary ml-2 p-2">image here</div>
+      <button (click)="onAddGraceNoteToBody()" class="btn btn-secondary ml-2">Add: {{ addGraceValue }}</button>
+    </form>
+
     <!-- # Symbols -->
     <button
-      class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0"
+      class="btn btn-secondary btn-block btn-sm p-0 d-flex px-2 m-0 border border-dark"
       (click)="showSymbols = !showSymbols"
     >Staff Symbols<span class="ml-auto">{{ !showSymbols ? 'show' : 'hide' }}</span></button>
     <div *ngIf="showSymbols" class="border border-secondary  p-2 mb-2">
@@ -185,7 +261,7 @@
     id="abcBody"
     class="form-control"
     cols="30"
-    rows="10"
+    rows="5"
     [hidden]="hide"
     [(ngModel)]="tuneBody"
     (ngModelChange)="signalChange()"

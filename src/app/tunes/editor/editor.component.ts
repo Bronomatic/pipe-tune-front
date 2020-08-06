@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TuneModel } from '../tune.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import abcjs from 'abcjs';
 
@@ -15,13 +15,16 @@ export class EditorComponent implements OnInit {
   @Input() edit: Boolean;
 
   tuneForm: FormGroup;
+  graceForm: FormGroup;
   abcEditor: abcjs.Editor;
 
   addNoteValue = ['A', '1'];
+  addGraceValue = '{c}';
 
   showSongForm = true;
   showNoteBuild = true;
   showSymbols = true;
+  showGraceBuild = true;
 
   tuneBody = '';
   fullTune = '';
@@ -38,7 +41,18 @@ export class EditorComponent implements OnInit {
       share: this.data.share,
       tempo: this.data.tempo,
       body: this.data.body,
-    })
+    });
+
+    this.graceForm = new FormGroup({
+      'graceType': new FormControl('single'),
+      'graceSingle': new FormControl('{c}'),
+      'graceDoubling': new FormControl('{gcd}'),
+      'graceThrow': new FormControl('{Gdc}'),
+      'graceGrip': new FormControl('{Gdc}'),
+      'graceRodin': new FormControl('{GBG}'),
+      'graceBirl': new FormControl('{AGAG}'),
+      'graceTaorluaths': new FormControl('{GdGe}'),
+    });
     const filteredBody = this.data.body.split('HP\n')[1];
     this.tuneBody = filteredBody ? filteredBody : '| ';
     this.onChanges();
@@ -68,6 +82,10 @@ export class EditorComponent implements OnInit {
       this.data = newData;
       this.signalChange();
     })
+    this.graceForm.valueChanges.subscribe(value => {
+      const groupName = 'grace' + value.graceType.charAt(0).toUpperCase() + value.graceType.slice(1);
+      this.addGraceValue = value[groupName];
+    })
   }
 
   onAddNoteValue(event:any) {
@@ -94,6 +112,10 @@ export class EditorComponent implements OnInit {
   onAddNoteToBody() {
     this.tuneBody += (this.addNoteValue[0] + this.addNoteValue[1]);
     this.signalChange();
+  }
+
+  onAddGraceNoteToBody() {
+    this.tuneBody += this.addGraceValue;
   }
 
   onAddSymbols(event: any) {
