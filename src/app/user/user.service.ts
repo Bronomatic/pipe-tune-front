@@ -13,6 +13,7 @@ export class UserService {
   private userId: string;
   private username: string;
   private authStatusListener = new Subject<boolean>();
+  private timeToLogout = 1000 * 6;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -40,7 +41,7 @@ export class UserService {
           this.username = response.username;
           this.authStatusListener.next(true);
           const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000 * 6);
+          const expirationDate = new Date(now.getTime() + expiresInDuration * this.timeToLogout);
           this.saveAuthData(token, expirationDate, this.userId, this.username);
           this.router.navigate(['/']);
         }
@@ -80,7 +81,7 @@ export class UserService {
       this.isAuthenticated = true;
       this.userId = authInformation.userId;
       this.username = authInformation.username;
-      this.setAuthTimer(expiresIn / 1000);
+      this.setAuthTimer(expiresIn / this.timeToLogout);
       this.authStatusListener.next(false);
     }
   }
@@ -99,7 +100,7 @@ export class UserService {
   private setAuthTimer(duration: number) {
     this.tokenTimer = setTimeout(() => {
       this.logout();
-    }, duration * 1000);
+    }, duration * this.timeToLogout);
   }
 
   private saveAuthData(token: string, expirationDate: Date, userId: string, username: string) {
