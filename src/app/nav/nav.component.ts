@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { SearchService } from '../search.service';
+import { SearchService } from '../tunes/search.service';
 import { UserService } from '../user/user.service';
 import { Subscription } from 'rxjs';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TuneService } from '../tune.service';
-import { UserService } from '../user/user.service';
+import { UserService } from '../../user/user.service';
 import { EditorComponent } from '../editor/editor.component';
 
 @Component({

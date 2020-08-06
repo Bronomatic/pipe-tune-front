@@ -20,7 +20,10 @@
 
   <div *ngIf="!viewTune; else view">
     <!-- * My Tunes -->
-    <div class="btn bg-primary text-white pt-0 m-1 d-flex justify-content-between" (click)="showTunes = !showTunes">
+    <div
+      class="btn bg-primary text-white pt-0 m-1 d-flex justify-content-between"
+      (click)="showTunes = !showTunes"
+    >
       <h5 class="p-1 ml-1 mt-1 mb-0">My Tunes</h5>
       <div class="p-1 mr-1">{{ showTunes ? 'hide' : 'show' }}</div>
     </div>

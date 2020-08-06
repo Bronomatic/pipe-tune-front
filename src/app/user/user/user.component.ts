@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { SearchService } from 'src/app/search.service';
+import { SearchService } from 'src/app/tunes/search.service';
 import { UserService } from '../user.service';
-import { TuneService } from 'src/app/tune.service';
+import { TuneService } from 'src/app/tunes/tune.service';
 
 @Component({
   selector: 'app-user',

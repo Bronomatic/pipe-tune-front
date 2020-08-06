@@ -10,13 +10,13 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { UserComponent } from './user/user/user.component';
-import { CreateComponent } from './user/create/create.component';
+import { CreateComponent } from './tunes/create/create.component';
 import { ViewComponent } from './view/view.component';
-import { TuneListComponent } from './tune-list/tune-list.component';
-import { AudioInterfaceComponent } from './audio-interface/audio-interface.component';
-import { EditorComponent } from './editor/editor.component';
+import { TuneListComponent } from './tunes/tune-list/tune-list.component';
+import { AudioInterfaceComponent } from './tunes/audio-interface/audio-interface.component';
+import { EditorComponent } from './tunes/editor/editor.component';
 import { TitleComponent } from './title/title.component';
-import { EditComponent } from './edit/edit.component';
+import { EditComponent } from './tunes/edit/edit.component';
 
 @NgModule({
   declarations: [

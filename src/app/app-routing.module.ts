@@ -6,10 +6,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { UserComponent } from './user/user/user.component';
-import { CreateComponent } from './user/create/create.component';
+import { CreateComponent } from './tunes/create/create.component';
 import { AuthGuard } from './auth.guard';
-import { TuneListComponent } from './tune-list/tune-list.component';
-import { EditComponent } from './edit/edit.component';
+import { TuneListComponent } from './tunes/tune-list/tune-list.component';
+import { EditComponent } from './tunes/edit/edit.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },

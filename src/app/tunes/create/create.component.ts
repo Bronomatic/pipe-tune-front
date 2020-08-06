@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { UserService } from '../user.service';
-import { TuneService } from 'src/app/tune.service';
+import { UserService } from '../../user/user.service';
+import { TuneService } from 'src/app/tunes/tune.service';
 
-import { TuneModel } from '../../tune.model';
-import { EditorComponent } from 'src/app/editor/editor.component';
+import { TuneModel } from '../tune.model';
+import { EditorComponent } from '../editor/editor.component';
 
 @Component({
   selector: 'app-create',
