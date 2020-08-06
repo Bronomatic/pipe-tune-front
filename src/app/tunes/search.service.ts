@@ -17,15 +17,14 @@ export class SearchService {
     const url = `http://localhost:8080/search?${queryString}`;
 
     return this.http.get<any>(url)
-      .subscribe(
-        response => {
-          this.listListener.next(response);
-          this.router.navigate(['/list']);
-        },
-        error => {
-          this.listListener.next({result: {}});
-        }
-      )
+      .toPromise()
+      .then(data => {
+        this.listListener.next(data);
+        this.router.navigate(['/list']);
+      })
+      .catch(err => {
+        this.listListener.next({result: {}});
+      })
   }
 
   getListListener() {
@@ -45,9 +44,13 @@ export class SearchService {
   getAllUsersTunes(username: String) {
     const url = `http://localhost:8080/search?u=${username}`;
     return this.http.get<any>(url)
-      .subscribe((response => {
-        this.userTuneListener.next(response);
-      }));
+      .toPromise()
+      .then(data => {
+        this.userTuneListener.next(data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   getUsersTunesListener() {

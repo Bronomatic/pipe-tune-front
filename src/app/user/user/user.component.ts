@@ -52,22 +52,25 @@ export class UserComponent implements OnInit, OnDestroy {
 
   getUserFavorites() {
     this.userService.getUserFavorites(this.userId, this.token)
-      .subscribe((response:{message:String, favorites:Array<string>}) => {
+      .toPromise()
+      .then((response:{message:String, favorites:Array<string>}) => {
         this.favorites = response.favorites;
-        this.searchService.getTuneListByIdArray(this.favorites)
-          .subscribe(response => {
-              const keys = Object.keys(response.result);
-              for(let each of keys){
-                this.userFavorites.push(response.result[each]);
-              }
-            });
-      });
+        return this.searchService.getTuneListByIdArray(this.favorites).toPromise()
+      })
+      .then(response => {
+        const keys = Object.keys(response.result);
+        for(let each of keys){
+          this.userFavorites.push(response.result[each]);
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   onView(id: String) {
     this.viewTune = true;
     this.searchService.getTuneById(id)
-      .subscribe(response => {
+      .toPromise()
+      .then(response => {
         this.tune = {
           title: response.result.title,
           body: response.result.body
@@ -85,7 +88,8 @@ export class UserComponent implements OnInit, OnDestroy {
     if(id){
       this.showDeleteModal = false;
       this.tuneService.deleteTune(this.tuneToDelete.id, token)
-        .subscribe(result => {
+        .toPromise()
+        .then(result => {
           this.userTunes = [];
           this.getUserCreations();
         });

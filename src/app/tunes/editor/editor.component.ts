@@ -67,25 +67,32 @@ export class EditorComponent implements OnInit {
 
   onChanges() {
     // * updates form values
-    this.tuneForm.valueChanges.subscribe(value => {
-      const newData:TuneModel = {
-        creator: value.creator,
-        title: value.title,
-        composer: value.composer,
-        origin: value.origin,
-        meter: value.meter,
-        type: value.type,
-        share: value.share,
-        tempo: value.tempo,
-        body: value.body,
-      }
-      this.data = newData;
-      this.signalChange();
-    })
-    this.graceForm.valueChanges.subscribe(value => {
-      const groupName = 'grace' + value.graceType.charAt(0).toUpperCase() + value.graceType.slice(1);
-      this.addGraceValue = value[groupName];
-    })
+    this.tuneForm.valueChanges
+      .toPromise()
+      .then(value => {
+        const newData:TuneModel = {
+          creator: value.creator,
+          title: value.title,
+          composer: value.composer,
+          origin: value.origin,
+          meter: value.meter,
+          type: value.type,
+          share: value.share,
+          tempo: value.tempo,
+          body: value.body,
+        }
+        this.data = newData;
+        this.signalChange();
+      })
+      .catch(err => console.log(err));
+
+    this.graceForm.valueChanges
+      .toPromise()
+      .then(value => {
+        const groupName = 'grace' + value.graceType.charAt(0).toUpperCase() + value.graceType.slice(1);
+        this.addGraceValue = value[groupName];
+      })
+      .catch(err => console.log(err));
   }
 
   onAddNoteValue(event:any) {
@@ -116,6 +123,7 @@ export class EditorComponent implements OnInit {
 
   onAddGraceNoteToBody() {
     this.tuneBody += this.addGraceValue;
+    this.signalChange();
   }
 
   onAddSymbols(event: any) {

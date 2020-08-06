@@ -26,9 +26,11 @@ export class TuneService {
       }
       const url = 'http://localhost:8080/create';
       this.http.post(url, data, options)
-        .subscribe(response => {
+        .toPromise()
+        .then(response => {
           this.router.navigate(['/user']);
-        });
+        })
+        .catch(err => console.log(err));
     }
 
     deleteTune(id:String, token:String) {
@@ -42,10 +44,12 @@ export class TuneService {
 
     editTune(id:String) {
       this.searchService.getTuneById(id)
-        .subscribe(result => {
+        .toPromise()
+        .then(result => {
           this.tuneToEdit = result.result;
           this.router.navigate(['/edit']);
-        });
+        })
+        .catch(err => console.log(err));
     }
 
     getTuneToEdit() {
@@ -61,8 +65,10 @@ export class TuneService {
         })
       }
       this.http.post(url, tune, options)
-        .subscribe(response => {
+        .toPromise()
+        .then(response => {
           this.router.navigate(['/user']);
-        });
+        })
+        .catch(err => console.log(err));
     }
 }

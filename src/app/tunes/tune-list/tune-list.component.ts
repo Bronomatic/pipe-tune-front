@@ -10,6 +10,7 @@ import { TuneService } from '../tune.service';
   styleUrls: ['./tune-list.component.css']
 })
 export class TuneListComponent implements OnInit, OnDestroy {
+  // @Import() searchData = [];
   private listSub: Subscription;
   username: String;
   isAuth = false;
@@ -31,8 +32,9 @@ export class TuneListComponent implements OnInit, OnDestroy {
     this.userId = this.userService.getUserId();
     this.token = this.userService.getToken();
     this.userService.getUserFavorites(this.userId, this.token)
-      .subscribe((result:{message:String,favorites:Array<String>}) => {
-        this.favorites = result.favorites;
+      .toPromise()
+      .then((result:{message:String,favorites:Array<String>}) => {
+          this.favorites = result.favorites;
       });
 
     this.isAuth = this.userService.getIsAuth();
@@ -51,13 +53,15 @@ export class TuneListComponent implements OnInit, OnDestroy {
   onView(id: String) {
     this.singleView = true;
     this.searchService.getTuneById(id)
-      .subscribe(response => {
+      .toPromise()
+      .then(response => {
         this.tune = {
           body: response.result.body,
           title: response.result.title,
           id: response.result._id
         };
-      });
+      })
+      .catch(err => console.log(err));
   }
 
   onFavorite(id:String) {

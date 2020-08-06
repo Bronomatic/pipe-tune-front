@@ -49,6 +49,8 @@ export class CreateComponent implements OnInit {
 
   onSaveTune() {
     const saveData = this.child.data;
+    const creator = this.userService.getUsername();
+    saveData.creator = creator;
     const token = this.userService.getToken();
     if(!this.id){
       // * If this is a new tune

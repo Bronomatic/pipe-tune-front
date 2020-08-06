@@ -21,7 +21,8 @@ export class UserService {
   onSignup(data:Object) {
     let url = 'http://localhost:8080/signup';
     this.http.post(url, data)
-      .subscribe(response => {
+      .toPromise()
+      .then(response => {
         this.router.navigate(['/']);
       });
   }
@@ -29,8 +30,15 @@ export class UserService {
   // * login
   onLogin(data:Object) {
     let url = 'http://localhost:8080/login';
-    this.http.post<{token: string, expiresIn: number, userId: string, username: string, favorites: Array<string>}>(url, data)
-      .subscribe(response => {
+    this.http.post<{
+      token: string,
+      expiresIn: number,
+      userId: string,
+      username: string,
+      favorites: Array<string>
+    }>(url, data)
+      .toPromise()
+      .then(response => {
         const token = response.token;
         this.token = token;
         if(token){
@@ -145,7 +153,9 @@ export class UserService {
       favorites: favorites
     }
     this.http.post(url, data, options)
-      .subscribe(response => { });
+      .toPromise()
+      .then(response => {})
+      .catch(err => console.log(err));
   }
 
   getUserFavorites(userId:String, token:String) {
