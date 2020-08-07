@@ -13,7 +13,7 @@ export class UserService {
   private userId: string;
   private username: string;
   private authStatusListener = new Subject<boolean>();
-  private timeToLogout = 1000 * 6;
+  private timeToLogout = 6000;
 
   constructor(private http: HttpClient, private router: Router) { }
 

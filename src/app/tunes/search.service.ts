@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -10,7 +9,7 @@ export class SearchService {
   private listListener = new Subject<any>();
   private userTuneListener = new Subject<any>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   onSearch(category: String, value: String) {
     const queryString = `q=${category}&v=${value}`;
@@ -20,7 +19,6 @@ export class SearchService {
       .toPromise()
       .then(data => {
         this.listListener.next(data);
-        this.router.navigate(['/list']);
       })
       .catch(err => {
         this.listListener.next({result: {}});

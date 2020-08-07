@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { SearchService } from '../tunes/search.service';
 import { UserService } from '../user/user.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -15,7 +16,11 @@ export class NavComponent implements OnInit, OnDestroy {
   userAuthenticated = false;
   private authListenerSubs: Subscription;
 
-  constructor(private searchService: SearchService, private userService: UserService) { }
+  constructor(
+    private searchService: SearchService,
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.username = this.userService.getUsername();
@@ -49,7 +54,8 @@ export class NavComponent implements OnInit, OnDestroy {
     }
 
     if(this.searchForm.valid) {
-      return this.searchService.onSearch(searchCategory, searchValue);
+      this.searchService.onSearch(searchCategory, searchValue);
+      this.router.navigate(['/list']);
     }
   }
 

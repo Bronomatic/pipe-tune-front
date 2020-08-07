@@ -75,6 +75,7 @@ export class UserComponent implements OnInit, OnDestroy {
           title: response.result.title,
           body: response.result.body
         }
+        this.tuneService.setAudioData(response.result.body);
       })
   }
 

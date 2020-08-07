@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TuneModel } from '../tune.model';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import abcjs from 'abcjs';
+import { TuneService } from '../tune.service';
 
 @Component({
   selector: 'app-editor',
@@ -29,7 +30,7 @@ export class EditorComponent implements OnInit {
   tuneBody = '';
   fullTune = '';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private tuneService: TuneService) { }
 
   ngOnInit() {
     this.tuneForm = this.formBuilder.group({
@@ -146,6 +147,7 @@ export class EditorComponent implements OnInit {
   signalChange() {
     const abcHidden = document.getElementById('abcHidden');
     this.data.body = abcHidden.innerHTML = `X:1\nT:${this.data.title}\nC:${this.data.composer}\nS:${this.data.origin}\nM:${this.data.meter}\nL:1/8\nQ:1/4=${this.data.tempo}\nK:HP\n${this.tuneBody}`;
+    this.tuneService.setAudioData(this.data.body);
     abcHidden.dispatchEvent(new Event('change'));
   }
 
