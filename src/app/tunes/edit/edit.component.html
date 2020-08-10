@@ -1,9 +1,11 @@
 <app-title [display]="!showToSave ? 'Tune Editor' : 'Update This Tune?'"></app-title>
 
-<app-editor
+<!-- <app-editor
   [data]="data"
   [hide]="showToSave"
-></app-editor>
+></app-editor> -->
+
+<app-drop-edit [data]="data"></app-drop-edit>
 
 <div class="container" *ngIf="!showToSave">
   <button class="btn btn-primary my-2" (click)="showToSave=true">Update</button>

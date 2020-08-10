@@ -19,6 +19,10 @@
   </div>
 
   <div *ngIf="!viewTune; else view">
+  <a href="/create">
+    <button class="btn btn-primary mb-3">Create new tune</button>
+  </a>
+
     <!-- * My Tunes -->
     <div
       class="btn bg-primary text-white pt-0 m-1 d-flex justify-content-between"
@@ -78,9 +82,9 @@
       </div>
     </div>
     <hr>
-    <a href="/create">
+    <!-- <a href="/create">
       <button class="btn btn-primary mb-3">Create new tune</button>
-    </a>
+    </a> -->
   </div>
 
   <ng-template #view class="container">

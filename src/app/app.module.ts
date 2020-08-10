@@ -17,6 +17,9 @@ import { AudioInterfaceComponent } from './tunes/audio-interface/audio-interface
 import { EditorComponent } from './tunes/editor/editor.component';
 import { TitleComponent } from './title/title.component';
 import { EditComponent } from './tunes/edit/edit.component';
+import { DropEditComponent } from './drop-edit/drop-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { EditComponent } from './tunes/edit/edit.component';
     AudioInterfaceComponent,
     EditorComponent,
     TitleComponent,
-    EditComponent
+    EditComponent,
+    DropEditComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,8 @@ import { EditComponent } from './tunes/edit/edit.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    DragDropModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,58 @@
+<div class="container">
+  <div id="paper">oops</div>
+</div>
+
+<div class="container" cdkDropListGroup>
+  <div
+  *ngFor="let row of completeBody"
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  [cdkDropListData]="row"
+  class="example-list" (cdkDropListDropped)="onDrop($event)"
+>
+  <div
+  class="example-box"
+  *ngFor="let each of row"
+  [ngClass]="{'grace': test.test(each)}"
+  cdkDrag
+  >{{each}}</div>
+</div>
+
+<textarea
+  class="form-control"
+  id="abcHidden"
+  cols="30" rows="10"
+  hidden
+></textarea>
+<!-- !!!!!!!!!!!!!!!!! -->
+
+<!-- <div class="container">
+
+  <ul
+    class="border list-group"
+    #todoList="cdkDropList"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="completeBody[0]"
+    [cdkDropListConnectedTo]="[doneList]"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <li
+      class="list-group-item border border-primary"
+      *ngFor="let each of completeBody[0]"
+      cdkDrag
+    >{{ each }}</li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="list"
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="null"
+    [cdkDropListConnectedTo]="todoList"
+    (cdkDropListDropped)="onDrop($event)">
+    <button *ngFor="let each of null" cdkDrag>
+    </button>
+  </div>
+</div> -->
