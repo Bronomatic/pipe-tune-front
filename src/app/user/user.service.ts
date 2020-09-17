@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,13 +15,15 @@ export class UserService {
   private userId: string;
   private username: string;
   private authStatusListener = new Subject<boolean>();
-  private timeToLogout = 6000;
+  private timeToLogout = 1000;
 
   constructor(private http: HttpClient, private router: Router) { }
 
   // * sign up
   onSignup(data:Object) {
-    let url = 'http://localhost:8080/signup';
+    // let url = 'http://localhost:8080/signup';
+    let url = `${environment.base_url}/signup`;
+
     this.http.post(url, data)
       .toPromise()
       .then(response => {
@@ -29,7 +33,8 @@ export class UserService {
 
   // * login
   onLogin(data:Object) {
-    let url = 'http://localhost:8080/login';
+    // let url = 'http://localhost:8080/login';
+    let url = `${environment.base_url}/login`;
     this.http.post<{
       token: string,
       expiresIn: number,
@@ -141,7 +146,8 @@ export class UserService {
   }
 
   updateFavorites(userId:String, favorites:Array<String>, token:String) {
-    const url = 'http://localhost:8080/favorites';
+    // const url = 'http://localhost:8080/favorites';
+    const url = `${environment.base_url}/favorites`;
     const options = {
       headers: new HttpHeaders({
         "Content-Type": 'application/json',
@@ -159,7 +165,8 @@ export class UserService {
   }
 
   getUserFavorites(userId:String, token:String) {
-    const url = 'http://localhost:8080/favorites';
+    // const url = 'http://localhost:8080/favorites';
+    const url = `${environment.base_url}/favorites`;
     const options = {
       headers: new HttpHeaders({
         "Content-Type": 'application/json',

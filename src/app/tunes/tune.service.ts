@@ -5,6 +5,8 @@ import { TuneModel } from './tune.model';
 import { SearchService } from './search.service';
 import { Subject } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +28,9 @@ export class TuneService {
           "Authorization": "Bearer " + token
         })
       }
-      const url = 'http://localhost:8080/create';
+      // const url = 'http://localhost:8080/create';
+      const url = `${environment.base_url}/create`;
+
       this.http.post(url, data, options)
         .toPromise()
         .then(response => {
@@ -40,7 +44,8 @@ export class TuneService {
         "Content-Type": 'application/json',
         "Authorization": "Bearer " + token
       })}
-      const url = `http://localhost:8080/delete/${id}`;
+      // const url = `http://localhost:8080/delete/${id}`;
+      const url = `${environment.base_url}/delete/${id}`;
       return this.http.delete(url, options);
     }
 
@@ -67,7 +72,8 @@ export class TuneService {
     }
 
     updateTune(tune:TuneModel, token:String) {
-      const url = `http://localhost:8080/update`;
+      // const url = `http://localhost:8080/update`;
+      const url = `${environment.base_url}/update`;
       const options = {
         headers: new HttpHeaders({
           "Content-Type": 'application/json',
